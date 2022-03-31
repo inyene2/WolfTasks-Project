@@ -22,6 +22,7 @@ public class ActiveTaskList extends AbstractTaskList {
 	 * Adds a task to a TaskList
 	 * 
 	 * @param t the Task to add
+	 * @throws IllegalArgumentException if the Task is not active
 	 */
 	public void addTask(Task t) {
 		super.addTask(t);
@@ -31,6 +32,7 @@ public class ActiveTaskList extends AbstractTaskList {
 	 * Sets a name for a TaskList
 	 * 
 	 * @param name the name to set a TaskListName to
+	 * @throws IllegalArgumentException if invalid name
 	 */
 	public void setTaskListName(String name) {
 		super.setTaskListName(name);

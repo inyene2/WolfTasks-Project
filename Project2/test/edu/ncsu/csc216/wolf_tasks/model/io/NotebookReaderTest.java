@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 
 class NotebookReaderTest {
 
+	/**
+	 * Tests NotebookReader.readNotebookFile()
+	 */
 	@Test
 	void testReadNotebookFile() {
 		fail("Not yet implemented");

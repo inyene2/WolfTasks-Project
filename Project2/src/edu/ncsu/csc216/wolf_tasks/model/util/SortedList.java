@@ -20,6 +20,8 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 * Adds an element to the list
 	 * 
 	 * @param element the element to add
+	 * @throws NullPointerException if element is null
+	 * @throws IllegalArgumentException if element is duplicate
 	 */
 	@Override
 	public void add(E element) {
@@ -43,6 +45,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 * Checks the data of a given Index
 	 * 
 	 * @param index the index to check
+	 * @throws IndexOutOfBoundsException if index out of bounds for list
 	 */
 	private void checkIndex(int index) {
 		// TODO
@@ -65,6 +68,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 * 
 	 * @param idx the index to get from in the list
 	 * @return the Element at given index
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	@Override
 	public E get(int idx) {

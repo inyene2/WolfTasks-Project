@@ -22,7 +22,8 @@ public class SwapList<E> implements ISwapList<E> {
 	/**
 	 * Adds an element to the List
 	 *
-	 * @param element
+	 * @param element element to add
+	 * @throws NullPointerException if element is null
 	 */
 	@Override
 	public void add(E element) {
@@ -44,6 +45,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * 
 	 * @param idx the index to remove at
 	 * @return the element at the index that was removed
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	@Override
 	public E remove(int idx) {
@@ -55,6 +57,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * Checks the element at a given index
 	 * 
 	 * @param index the index to check
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	private void checkIndex(int index) {
 
@@ -64,6 +67,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * Moves an element up in the list
 	 * 
 	 * @param idx the index element to move up
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	@Override
 	public void moveUp(int idx) {
@@ -75,6 +79,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * Moves an element down in the list
 	 * 
 	 * @param idx the index element to move down
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	@Override
 	public void moveDown(int idx) {
@@ -86,6 +91,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * Moves an element to the front of the list
 	 * 
 	 * @param idx the index element to move to front
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	@Override
 	public void moveToFront(int idx) {
@@ -97,6 +103,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * Moves an element to the back of the list
 	 * 
 	 * @param idx the index element to move to back
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	@Override
 	public void moveToBack(int idx) {
@@ -109,6 +116,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 *
 	 * @param idx the index to get from
 	 * @return the element at the given index
+	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	@Override
 	public E get(int idx) {

@@ -44,6 +44,7 @@ public class Task {
 	 * Sets the name of a Task
 	 * 
 	 * @param taskName the taskName to set
+	 * @throws IllegalArgumentException if invalid name
 	 */
 	public void setTaskName(String taskName) {
 		this.taskName = taskName;
@@ -62,6 +63,7 @@ public class Task {
 	 * Sets the description of a Task
 	 * 
 	 * @param taskDescription the taskDescription to set
+	 * @throws IllegalArgumentException if invalid taskDescription
 	 */
 	public void setTaskDescription(String taskDescription) {
 		this.taskDescription = taskDescription;
@@ -116,6 +118,7 @@ public class Task {
 	 * Adds a TaskList to the current Task
 	 * 
 	 * @param taskList the TaskList to add
+	 * @throws IllegalArgumentException if taskList is null
 	 */
 	public void addTaskList(AbstractTaskList taskList) {
 

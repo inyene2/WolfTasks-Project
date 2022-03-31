@@ -22,6 +22,7 @@ public abstract class AbstractTaskList {
 	 * 
 	 * @param name  the name of a List
 	 * @param count the count of completed tasks
+	 * @throws IllegalArgument exception if name invalid or count invalid
 	 */
 	public AbstractTaskList(String name, int count) {
 		setCompletedCount(count);

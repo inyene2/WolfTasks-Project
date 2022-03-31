@@ -22,6 +22,7 @@ public class NotebookReader {
 	 * 
 	 * @param file the notebook file to read in
 	 * @return a Notebook object made of TaskLists
+	 * @throws IllegalArgumentException if can't read from file
 	 */
 	public static Notebook readNotebookFile(File file) {
 		return null;

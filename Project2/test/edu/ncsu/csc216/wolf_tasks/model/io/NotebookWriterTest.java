@@ -4,8 +4,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests NotebookWriter class
+ * @author inyene2
+ *
+ */
 public class NotebookWriterTest {
 	
+	/**
+	 * Tests NotebookWriter.writeNotebookFile()
+	 */
 	@Test
 	void testWriteNotebookFile() {
 		fail("Not yet implemented");

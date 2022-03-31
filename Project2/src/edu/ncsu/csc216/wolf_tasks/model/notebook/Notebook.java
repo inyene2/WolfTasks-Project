@@ -25,6 +25,7 @@ public class Notebook {
 	 * Constructor for Notebook
 	 * 
 	 * @param name the name of a Notebook
+	 * @throws IllegalArgumentException for invalid name
 	 */
 	public Notebook(String name) {
 		setNotebookName(name);
@@ -52,6 +53,7 @@ public class Notebook {
 	 * Sets the name of a Notebook
 	 * 
 	 * @param notebookName the notebookName to set
+	 * @throws IllegalArgumentException for invalid name
 	 */
 	private void setNotebookName(String notebookName) {
 		this.notebookName = notebookName;
@@ -79,6 +81,7 @@ public class Notebook {
 	 * Adds a TaskList to the Notebook
 	 * 
 	 * @param taskList the TaskList to add
+	 * @throws IllegalArgumentException for invalid name
 	 */
 	public void addTaskList(TaskList taskList) {
 
@@ -123,6 +126,7 @@ public class Notebook {
 	 * Edits the current task list with a name
 	 * 
 	 * @param name the parameter to edit a task with
+	 * @throws IllegalArgumentException for invalid name
 	 */
 	public void editTaskList(String name) {
 
@@ -130,7 +134,7 @@ public class Notebook {
 
 	/**
 	 * Removes a TaskList from the Notebook
-	 * 
+	 * @throws IllegalArgumentException if the currentTaskList is an ActiveTaskList
 	 */
 	public void removeTaskList() {
 
@@ -153,6 +157,7 @@ public class Notebook {
 	 * @param description the description of a Task
 	 * @param recurring   whether or not a task is Recurring
 	 * @param active      whether or not a task is Active
+	 * @throws IllegalArgumentException for invalid task 
 	 */
 	public void editTask(int id, String taskName, String description, boolean recurring, boolean active) {
 
