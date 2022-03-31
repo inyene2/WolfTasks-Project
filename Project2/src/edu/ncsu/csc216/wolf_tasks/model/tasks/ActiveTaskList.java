@@ -4,8 +4,8 @@ public class ActiveTaskList extends AbstractTaskList {
 
 	public static final String ACTIVE_TASKS_NAME = "Active Tasks";
 
-	public ActiveTaskList(String name, int count) {
-		super(name, count);
+	public ActiveTaskList() {
+		super(ACTIVE_TASKS_NAME, 0);
 	}
 
 	public void addTask(Task t) {
