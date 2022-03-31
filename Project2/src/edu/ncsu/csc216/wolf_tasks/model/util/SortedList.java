@@ -3,13 +3,13 @@ package edu.ncsu.csc216.wolf_tasks.model.util;
 public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 
 	private int size;
-	
+
 	private ListNode front;
-	
+
 	@Override
 	public void add(E element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -17,9 +17,9 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	private void checkIndex(int index) {
-		//TODO
+		// TODO
 	}
 
 	@Override
@@ -39,14 +39,13 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
 	public class ListNode {
-		
+
 		public E data;
-		
+
 		public ListNode(E data, ListNode next) {
-			
+
 		}
 	}
 }

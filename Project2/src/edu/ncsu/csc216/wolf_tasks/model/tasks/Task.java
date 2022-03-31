@@ -5,8 +5,7 @@ public class Task {
 	private String taskDescription;
 	private boolean recurring;
 	private boolean active;
-	
-	
+
 	/**
 	 * @param taskName
 	 * @param taskDescription
@@ -14,9 +13,8 @@ public class Task {
 	 * @param active
 	 */
 	public Task(String taskName, String taskDescription, boolean recurring, boolean active) {
-		
-	}
 
+	}
 
 	/**
 	 * @return the taskName
@@ -25,14 +23,12 @@ public class Task {
 		return taskName;
 	}
 
-
 	/**
 	 * @param taskName the taskName to set
 	 */
 	public void setTaskName(String taskName) {
 		this.taskName = taskName;
 	}
-
 
 	/**
 	 * @return the taskDescription
@@ -41,14 +37,12 @@ public class Task {
 		return taskDescription;
 	}
 
-
 	/**
 	 * @param taskDescription the taskDescription to set
 	 */
 	public void setTaskDescription(String taskDescription) {
 		this.taskDescription = taskDescription;
 	}
-
 
 	/**
 	 * @return the recurring
@@ -57,14 +51,12 @@ public class Task {
 		return recurring;
 	}
 
-
 	/**
 	 * @param recurring the recurring to set
 	 */
 	public void setRecurring(boolean recurring) {
 		this.recurring = recurring;
 	}
-
 
 	/**
 	 * @return the active
@@ -73,32 +65,31 @@ public class Task {
 		return active;
 	}
 
-
 	/**
 	 * @param active the active to set
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 	public String getTaskListName() {
 		return null;
 	}
-	
+
 	public void addTaskList(AbstractTaskList taskList) {
-		 
+
 	}
-	
+
 	public void completeTask() {
-		
+
 	}
-	
+
 	public Object clone() {
 		return null;
 	}
-	
+
 	public String toString() {
 		return null;
 	}
-	
+
 }
