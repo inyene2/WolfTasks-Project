@@ -1,11 +1,10 @@
 package edu.ncsu.csc216.wolf_tasks.model.tasks;
 
 import edu.ncsu.csc216.wolf_tasks.model.util.ISwapList;
-import edu.ncsu.csc216.wolf_tasks.model.util.SwapList;
-
 
 /**
- * Abstract class AbstractTaskList that all other TaskLists inherit from. Provides the basis for TaskList and ActiveTaskList
+ * Abstract class AbstractTaskList that all other TaskLists inherit from.
+ * Provides the basis for TaskList and ActiveTaskList
  * 
  * @author Mason Morano
  * @author Inyene Etuk
@@ -21,7 +20,7 @@ public abstract class AbstractTaskList {
 	/**
 	 * Constructor for an AbstractTaskList
 	 * 
-	 * @param name the name of a List
+	 * @param name  the name of a List
 	 * @param count the count of completed tasks
 	 */
 	public AbstractTaskList(String name, int count) {
@@ -103,7 +102,6 @@ public abstract class AbstractTaskList {
 		return null;
 	}
 
-	
 	/**
 	 * Sets the flag of a task to Completed
 	 * 

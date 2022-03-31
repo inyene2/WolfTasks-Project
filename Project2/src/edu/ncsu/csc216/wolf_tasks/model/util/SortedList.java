@@ -42,7 +42,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	/**
 	 * Checks the data of a given Index
 	 * 
-	 * @param index
+	 * @param index the index to check
 	 */
 	private void checkIndex(int index) {
 		// TODO

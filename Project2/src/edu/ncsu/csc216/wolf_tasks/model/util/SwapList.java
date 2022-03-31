@@ -33,7 +33,7 @@ public class SwapList<E> implements ISwapList<E> {
 	/**
 	 * Checks the capacity
 	 * 
-	 * @param capacity to check
+	 * @param cap capacity to check
 	 */
 	private void checkCapacity(int cap) {
 

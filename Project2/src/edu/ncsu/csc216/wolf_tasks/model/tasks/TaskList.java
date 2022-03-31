@@ -21,6 +21,8 @@ public class TaskList extends AbstractTaskList implements Comparable<TaskList> {
 
 	/**
 	 * Returns a 2D array of Strings that contain properties of the Tasks in a List
+	 * 
+	 * @return a 2D array of Strings that contain properties of the Tasks in a List
 	 */
 	public String[][] getTasksAsArray() {
 		return null;
@@ -29,7 +31,9 @@ public class TaskList extends AbstractTaskList implements Comparable<TaskList> {
 	/**
 	 * Compares a TaskList with the current TaskList and returns a value depending
 	 * on the comparison
-	 *
+	 * 
+	 * 
+	 * @param list a TaskList to compare to
 	 * @return an Integer that will return different values depending on whether or
 	 *         not a TaskList is greater or less
 	 */

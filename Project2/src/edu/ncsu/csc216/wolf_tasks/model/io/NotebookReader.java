@@ -43,7 +43,7 @@ public class NotebookReader {
 	 * 
 	 * @param taskList a TaskList to read in and process
 	 * @param fileName a name to give a Task?
-	 * @return
+	 * @return a Task object
 	 */
 	private static Task processTask(AbstractTaskList taskList, String fileName) {
 		return null;
