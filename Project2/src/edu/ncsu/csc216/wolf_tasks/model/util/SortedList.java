@@ -17,6 +17,10 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	private void checkIndex(int index) {
+		//TODO
+	}
 
 	@Override
 	public boolean contains(E element) {
@@ -39,5 +43,10 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	
 	public class ListNode {
 		
+		public E data;
+		
+		public ListNode(E data, ListNode next) {
+			
+		}
 	}
 }
