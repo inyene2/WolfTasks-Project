@@ -84,7 +84,7 @@ public class Task {
 
 	}
 
-	public Object clone() {
+	public Object clone() throws CloneNotSupportedException {
 		return null;
 	}
 
