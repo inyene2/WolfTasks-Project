@@ -42,7 +42,7 @@ public class SwapList<E> implements ISwapList<E> {
 	/**
 	 * Removes at a given index
 	 * 
-	 * @param the index to remove at
+	 * @param idx the index to remove at
 	 * @return the element at the index that was removed
 	 */
 	@Override
