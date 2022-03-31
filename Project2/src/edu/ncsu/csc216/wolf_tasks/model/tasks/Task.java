@@ -20,6 +20,8 @@ public class Task {
 	private boolean active;
 
 	/**
+	 * Constructor for a Task object. Has a name, desc, and whether or not task is recurring and or active.
+	 * 
 	 * @param taskName        the name of a Task
 	 * @param taskDescription the description of a Task
 	 * @param recurring       whether or not a Task is recurring
