@@ -1,5 +1,13 @@
 package edu.ncsu.csc216.wolf_tasks.model.util;
 
+/**
+ * SortedList utility class for sorted elements
+ * 
+ * @author Mason Morano
+ * @author Inyene Etuk
+ *
+ * @param <E> generic type for list
+ */
 public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 
 	/** The size of the List */

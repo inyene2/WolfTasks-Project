@@ -1,5 +1,13 @@
 package edu.ncsu.csc216.wolf_tasks.model.util;
 
+/**
+ * SwapList utility class for moving elements
+ * 
+ * @author Mason Morano
+ * @author Inyene Etuk
+ *
+ * @param <E> generic type for list
+ */
 public class SwapList<E> implements ISwapList<E> {
 
 	/** Initial capacity for a SwapList */
