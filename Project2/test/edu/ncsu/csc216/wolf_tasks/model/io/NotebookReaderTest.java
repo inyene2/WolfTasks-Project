@@ -4,6 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests NotebookReader class
+ * @author Mason Morano
+ * @author Inyene Etuk
+ *
+ */
 class NotebookReaderTest {
 
 	/**

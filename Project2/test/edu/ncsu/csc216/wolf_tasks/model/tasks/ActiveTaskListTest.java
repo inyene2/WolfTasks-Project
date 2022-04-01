@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests ActiveTaskList class
- * @author inyene2
+ * @author Mason Morano
+ * @author Inyene Etuk
  *
  */
 public class ActiveTaskListTest {

@@ -28,6 +28,10 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void add(E element) {
 		// TODO Auto-generated method stub
+		list.clone();
+		size = INITIAL_CAPACITY;
+		size++;
+		checkCapacity(0);
 
 	}
 
@@ -50,6 +54,7 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public E remove(int idx) {
 		// TODO Auto-generated method stub
+		checkIndex(idx);
 		return null;
 	}
 

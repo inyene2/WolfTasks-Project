@@ -25,6 +25,8 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public void add(E element) {
+		size++;
+		front.data = null;
 		// TODO Auto-generated method stub
 
 	}
@@ -38,6 +40,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	@Override
 	public E remove(int idx) {
 		// TODO Auto-generated method stub
+		checkIndex(0);
 		return null;
 	}
 

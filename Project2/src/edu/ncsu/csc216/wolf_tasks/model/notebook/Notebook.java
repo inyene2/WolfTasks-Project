@@ -93,6 +93,7 @@ public class Notebook {
 	 * @return an array of Strings of the names of the TaskLists in a Notebook
 	 */
 	public String[] getTaskListsNames() {
+		getActiveTaskList();
 		return null;
 	}
 

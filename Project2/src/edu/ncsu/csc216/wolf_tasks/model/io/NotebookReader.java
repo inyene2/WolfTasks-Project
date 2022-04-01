@@ -25,6 +25,7 @@ public class NotebookReader {
 	 * @throws IllegalArgumentException if can't read from file
 	 */
 	public static Notebook readNotebookFile(File file) {
+		processTask(processTaskList(""), "");
 		return null;
 	}
 
