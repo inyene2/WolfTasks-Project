@@ -19,19 +19,26 @@ public class SwapList<E> implements ISwapList<E> {
 	/** Size field of the List, how much the list is populated */
 	private int size;
 
+	@SuppressWarnings("unchecked")
+	public SwapList() {
+		this.list = (E[]) new Object[INITIAL_CAPACITY];
+		this.size = 0;
+
+	}
+
 	/**
 	 * Adds an element to the List
 	 *
-	 * @param element element to add
+	 * @param element
 	 * @throws NullPointerException if element is null
 	 */
 	@Override
 	public void add(E element) {
-		// TODO Auto-generated method stub
-		list.clone();
-		size = INITIAL_CAPACITY;
-		size++;
-		checkCapacity(0);
+		if (size == 0) {
+			list[0] = element;
+		} else {
+			list[1] = element;
+		}
 
 	}
 
@@ -41,7 +48,10 @@ public class SwapList<E> implements ISwapList<E> {
 	 * @param cap capacity to check
 	 */
 	private void checkCapacity(int cap) {
-
+		if (cap < 10 || cap > 250) {
+			throw new IllegalArgumentException();
+		}
+		
 	}
 
 	/**
@@ -53,9 +63,18 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public E remove(int idx) {
-		// TODO Auto-generated method stub
-		checkIndex(idx);
-		return null;
+		checkCapacity(0);
+		// get output E
+		E output = list[idx];
+		// left shift
+		for (int j = idx; j < this.size; j++) {
+			list[j] = list[j + 1];
+		}
+		// update size
+		size--;
+
+		// return E
+		return output;
 	}
 
 	/**
@@ -76,7 +95,10 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveUp(int idx) {
-		// TODO Auto-generated method stub
+		checkIndex(0);
+		E temp = list[idx - 1];
+		list[idx - 1] = list[idx];
+		list[idx] = temp;
 
 	}
 
@@ -88,7 +110,9 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveDown(int idx) {
-		// TODO Auto-generated method stub
+		E temp = list[idx + 1];
+		list[idx + 1] = list[idx];
+		list[idx] = temp;
 
 	}
 
@@ -100,7 +124,9 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveToFront(int idx) {
-		// TODO Auto-generated method stub
+		E temp = list[0];
+		list[0] = list[idx];
+		list[idx] = temp;
 
 	}
 
@@ -112,7 +138,9 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveToBack(int idx) {
-		// TODO Auto-generated method stub
+		E temp = list[size() - 1];
+		list[size() - 1] = list[idx];
+		list[idx] = temp;
 
 	}
 
@@ -121,12 +149,11 @@ public class SwapList<E> implements ISwapList<E> {
 	 *
 	 * @param idx the index to get from
 	 * @return the element at the given index
-	 * @throws IndexOutOfBoundsException if idx out of bounds for list
+	 * 
 	 */
 	@Override
 	public E get(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		return list[idx];
 	}
 
 	/**
@@ -136,8 +163,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 }
