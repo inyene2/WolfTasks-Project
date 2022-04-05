@@ -29,6 +29,7 @@ public class Notebook {
 	 */
 	public Notebook(String name) {
 		setNotebookName(name);
+		setChanged(false);
 	}
 
 	/**

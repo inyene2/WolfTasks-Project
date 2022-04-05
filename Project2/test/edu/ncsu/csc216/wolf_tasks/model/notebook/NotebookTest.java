@@ -1,8 +1,18 @@
 package edu.ncsu.csc216.wolf_tasks.model.notebook;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 import org.junit.jupiter.api.Test;
+
+import edu.ncsu.csc216.wolf_tasks.model.io.NotebookReader;
+import edu.ncsu.csc216.wolf_tasks.model.tasks.Task;
+import edu.ncsu.csc216.wolf_tasks.model.tasks.TaskList;
 
 /**
  * Tests Notebook class
@@ -12,12 +22,21 @@ import org.junit.jupiter.api.Test;
  */
 public class NotebookTest {
 	
+	/** Valid notebook file */
+	private final File validTestFile = new File("test-files/notebook0.txt");
+	
+	/** Output file */
+	private final File outputFile = new File("test-files/actual_out.txt");
+	
 	/**
 	 * Tests Notebook constructor
 	 */
 	@Test
 	void testNotebook() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		
+		assertEquals("Notebook1", n.getNotebookName());
+		assertFalse(n.isChanged());
 	}
 	
 	/**
@@ -25,7 +44,13 @@ public class NotebookTest {
 	 */
 	@Test
 	void testSaveNotebook() {
-		fail("Not yet implemented");
+		Notebook n = NotebookReader.readNotebookFile(validTestFile);
+		
+		assertDoesNotThrow(() -> n.saveNotebook(outputFile));
+		
+		n.saveNotebook(outputFile);
+		
+		checkFiles(validTestFile, outputFile);
 	}
 
 	/**
@@ -33,15 +58,11 @@ public class NotebookTest {
 	 */
 	@Test
 	void testGetNotebookName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests Notebook.setNotebookName()
-	 */
-	@Test
-	void testSetNotebookName() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		Notebook n2 = new Notebook("Notebook2");
+		
+		assertEquals("Notebook1", n.getNotebookName());
+		assertEquals("Notebook2", n2.getNotebookName());
 	}
 
 	/**
@@ -49,7 +70,11 @@ public class NotebookTest {
 	 */
 	@Test
 	void testIsChanged() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		
+		assertFalse(n.isChanged());
+		n.setChanged(true);
+		assertTrue(n.isChanged());
 	}
 	
 	/**
@@ -57,7 +82,11 @@ public class NotebookTest {
 	 */
 	@Test
 	void testSetChanged() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		
+		assertFalse(n.isChanged());
+		n.setChanged(true);
+		assertTrue(n.isChanged());
 	}
 
 	/**
@@ -65,7 +94,17 @@ public class NotebookTest {
 	 */
 	@Test
 	void testAddTaskList() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		Task t = new Task("Name", "Task description", true, false);
+		taskList.addTask(t);
+		
+		assertEquals(0, n.getTaskListsNames().length);
+		
+		n.addTaskList(taskList);
+		
+		assertEquals(1, n.getTaskListsNames().length);
+		
 	}
 
 	/**
@@ -73,7 +112,17 @@ public class NotebookTest {
 	 */
 	@Test
 	void testGetTaskListsNames() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		TaskList taskList2 = new TaskList("List2", 0);
+		
+		assertEquals(0, n.getTaskListsNames().length);
+		
+		n.addTaskList(taskList);
+		n.addTaskList(taskList2);
+		
+		assertEquals("List1", n.getTaskListsNames()[0]);
+		assertEquals("List2", n.getTaskListsNames()[1]);
 	}
 
 	/**
@@ -81,7 +130,16 @@ public class NotebookTest {
 	 */
 	@Test
 	void testSetCurrentTaskList() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		TaskList taskList2 = new TaskList("List2", 0);
+		
+		n.addTaskList(taskList);
+		n.addTaskList(taskList2);
+		
+		n.setCurrentTaskList("List1");
+		
+		assertEquals("List1", n.getCurrentTaskList().getTaskListName());
 	}
 	
 	/**
@@ -89,7 +147,16 @@ public class NotebookTest {
 	 */
 	@Test
 	void testGetCurrentTaskList() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		TaskList taskList2 = new TaskList("List2", 0);
+		
+		n.addTaskList(taskList);
+		n.addTaskList(taskList2);
+		
+		n.setCurrentTaskList("List1");
+		
+		assertEquals("List1", n.getCurrentTaskList().getTaskListName());
 	}
 
 	/**
@@ -97,7 +164,14 @@ public class NotebookTest {
 	 */
 	@Test
 	void testEditTaskList() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		
+		n.addTaskList(taskList);
+		
+		n.editTaskList("List1");
+		
+		assertTrue(n.isChanged());
 	}
 
 	/**
@@ -105,7 +179,20 @@ public class NotebookTest {
 	 */
 	@Test
 	void testRemoveTaskList() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		TaskList taskList2 = new TaskList("List2", 0);
+		
+		assertEquals(0, n.getTaskListsNames().length);
+		
+		n.addTaskList(taskList);
+		n.addTaskList(taskList2);
+		
+		assertEquals(2, n.getTaskListsNames().length);
+		
+		n.removeTaskList();
+		
+		assertEquals(1, n.getTaskListsNames().length);
 	}
 
 	/**
@@ -113,7 +200,17 @@ public class NotebookTest {
 	 */
 	@Test
 	void testAddTask() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		Task t = new Task("Name", "Task description", true, false);
+		taskList.addTask(t);
+		
+		assertEquals(0, n.getTaskListsNames().length);
+		
+		n.addTaskList(taskList);
+		n.setCurrentTaskList("List1");
+		
+		assertEquals("Name", n.getCurrentTaskList().getTask(0).getTaskName());
 	}
 
 	/**
@@ -121,7 +218,38 @@ public class NotebookTest {
 	 */
 	@Test
 	void testEditTask() {
-		fail("Not yet implemented");
+		Notebook n = new Notebook("Notebook1");
+		TaskList taskList = new TaskList("List1", 0);
+		Task t = new Task("Name", "Task description", true, false);
+		taskList.addTask(t);
+		
+		assertEquals(0, n.getTaskListsNames().length);
+		
+		n.addTaskList(taskList);
+		n.setCurrentTaskList("List1");
+		n.editTask(0, "Name2", "Task description 2", false, false);
+		
+		assertEquals("Name2", n.getCurrentTaskList().getTask(0).getTaskName());
+	}
+	
+	/**
+	 * Private helper method for comparing files in write to file method
+	 * @param expFile expected file to compare (want)
+	 * @param actFile actual file to compare (have)
+	 */
+	private void checkFiles(File expFile, File actFile) {
+		try (Scanner expScanner = new Scanner(expFile);
+			 Scanner actScanner = new Scanner(actFile);) {
+			
+			while (expScanner.hasNextLine()) {
+				assertEquals(expScanner.nextLine(), actScanner.nextLine());
+			}
+			
+			expScanner.close();
+			actScanner.close();
+		} catch (IOException e) {
+			fail("Error reading files.");
+		}
 	}
 
 }
