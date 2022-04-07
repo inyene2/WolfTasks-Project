@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import edu.ncsu.csc216.wolf_tasks.model.util.SortedList.ListNode;
+
 
 /**
  * Tests SortedList class
@@ -114,5 +116,19 @@ public class SortedListTest {
 	void testRemove1() {
 		SortedList<String> list = new SortedList<String>();
 		assertEquals("deez",list.remove(0));
+	}
+	
+	/**
+	 * Tests SortedList.ListNode
+	 */
+	@Test
+	void testListNode() {
+		SortedList<String> list = new SortedList<String>();
+		
+		@SuppressWarnings("rawtypes")
+		ListNode l = list.new ListNode("String", null);
+		assertNull(l.next);
+		assertEquals("String", l.data);
+		
 	}
 }
