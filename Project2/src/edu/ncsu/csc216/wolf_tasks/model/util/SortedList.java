@@ -125,12 +125,9 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 
 		/** The data contained in a ListNode */
 		public E data;
-<<<<<<< HEAD
-		/** Points to next ListNode in list */
-=======
+
 		
 		/** The next ListNode to refer to */
->>>>>>> branch 'main' of https://github.ncsu.edu/engr-csc216-spring2022/csc216-P2-T-37.git
 		public ListNode next;
 
 		/**
@@ -141,10 +138,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		 */
 		public ListNode(E data, ListNode next) {
 			this.data = data;
-<<<<<<< HEAD
-=======
 			this.next = next;
->>>>>>> branch 'main' of https://github.ncsu.edu/engr-csc216-spring2022/csc216-P2-T-37.git
 		}
 	}
 }

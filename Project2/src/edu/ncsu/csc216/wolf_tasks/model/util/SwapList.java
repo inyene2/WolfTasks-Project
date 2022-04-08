@@ -84,7 +84,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	private void checkIndex(int index) {
-		index++;
+		
 	}
 
 	/**
