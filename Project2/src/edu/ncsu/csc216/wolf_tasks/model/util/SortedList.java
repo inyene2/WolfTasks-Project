@@ -125,7 +125,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 
 		/** The data contained in a ListNode */
 		public E data;
-		
+		/** Points to next ListNode in list */
 		public ListNode next;
 
 		/**
@@ -135,7 +135,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		 * @param next the reference to the next ListNode
 		 */
 		public ListNode(E data, ListNode next) {
-
+			this.data = data;
 		}
 	}
 }

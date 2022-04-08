@@ -80,7 +80,7 @@ public abstract class AbstractTaskList {
 	 * @param t the task to add
 	 */
 	public void addTask(Task t) {
-
+		t.completeTask();
 	}
 
 	/**
@@ -109,7 +109,7 @@ public abstract class AbstractTaskList {
 	 * @param t the Task to set as Complete
 	 */
 	public void completeTask(Task t) {
-
+		t.getTaskName();
 	}
 
 	/**

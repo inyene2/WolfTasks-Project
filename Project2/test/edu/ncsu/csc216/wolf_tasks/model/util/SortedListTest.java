@@ -104,7 +104,7 @@ public class SortedListTest {
 	@Test
 	void testGet() {
 		SortedList<String> list = new SortedList<String>();
-		assertEquals("deez",list.get(0));
+		assertEquals("deez", list.get(0));
 	}
 	
 	/**
@@ -113,6 +113,6 @@ public class SortedListTest {
 	@Test
 	void testRemove1() {
 		SortedList<String> list = new SortedList<String>();
-		assertEquals("deez",list.remove(0));
+		assertEquals("deez", list.remove(0));
 	}
 }
