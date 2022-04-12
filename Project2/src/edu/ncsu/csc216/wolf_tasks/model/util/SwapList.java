@@ -19,6 +19,7 @@ public class SwapList<E> implements ISwapList<E> {
 	/** Size field of the List, how much the list is populated */
 	private int size;
 
+	/** Suppress warning */
 	@SuppressWarnings("unchecked")
 	public SwapList() {
 		this.list = (E[]) new Object[INITIAL_CAPACITY];
@@ -28,8 +29,7 @@ public class SwapList<E> implements ISwapList<E> {
 
 	/**
 	 * Adds an element to the List
-	 *
-	 * @param element
+	 * @param element element to add
 	 * @throws NullPointerException if element is null
 	 */
 	@Override
@@ -84,7 +84,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	private void checkIndex(int index) {
-
+		
 	}
 
 	/**

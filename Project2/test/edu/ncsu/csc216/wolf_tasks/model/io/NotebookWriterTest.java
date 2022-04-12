@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import edu.ncsu.csc216.wolf_tasks.model.notebook.Notebook;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.Task;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.TaskList;
 import edu.ncsu.csc216.wolf_tasks.model.util.ISortedList;
@@ -36,8 +35,34 @@ public class NotebookWriterTest {
 	@Test
 	void testWriteNotebookFile() {
 		// TODO figure out how this works in making sure the input file is exactly the same as the output file
+		//create list of TaskLists
 		ISortedList<TaskList> taskList = new SortedList<TaskList>();
 		
+		//create new TaskLists
+		TaskList t = new TaskList("Tasklist1", 3);
+		TaskList t2 = new TaskList("Tasklist2", 4);
+		
+		//create new Tasks
+		Task k = new Task("Squat", "Workout1", true, false);
+		Task k2 = new Task("Run", "Workout2", false, true);
+		Task k3 = new Task("Rest", "Workout3", false, false);
+		
+		//add Task to TaskLists
+		t.addTask(k);
+		t.addTask(k2);
+		t2.addTask(k3);
+		
+		//add TaskLists to list of TaskLists
+		taskList.add(t);
+		taskList.add(t2);
+		
+		try {
+			NotebookWriter.writeNotebookFile(outputFile, "Gym", taskList);
+			// check expected file
+			checkFiles(outputFile, validTestFile);
+		} catch(Exception e) {
+			fail("Cannot write to file");
+		}
 		assertDoesNotThrow(() -> NotebookWriter.writeNotebookFile(outputFile, "Notebook1", taskList));
 		
 		NotebookWriter.writeNotebookFile(outputFile, "Notebook1", taskList);
