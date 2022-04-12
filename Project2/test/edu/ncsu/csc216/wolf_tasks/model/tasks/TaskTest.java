@@ -56,7 +56,7 @@ public class TaskTest {
 	 */
 	@Test
 	void testGetTaskDescription() {
-		Task t = new Task("Name", "Description", true, false);
+		Task t = new Task("Name", "Description2", true, false);
 
 		assertEquals("Description2", t.getTaskDescription());
 	}
