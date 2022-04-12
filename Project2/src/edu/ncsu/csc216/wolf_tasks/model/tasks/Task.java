@@ -1,5 +1,8 @@
 package edu.ncsu.csc216.wolf_tasks.model.tasks;
 
+import edu.ncsu.csc216.wolf_tasks.model.util.ISwapList;
+import edu.ncsu.csc216.wolf_tasks.model.util.SwapList;
+
 /**
  * This is the Task object class, the object that comprises TaskLists that
  * comprise Notebooks
@@ -8,7 +11,7 @@ package edu.ncsu.csc216.wolf_tasks.model.tasks;
  * @author Inyene Etuk
  *
  */
-public class Task {
+public class Task implements Cloneable {
 
 	/** The name of a Task */
 	private String taskName;
@@ -18,6 +21,8 @@ public class Task {
 	private boolean recurring;
 	/** Whether or not a Task is active */
 	private boolean active;
+	/** An ISwapList of AbstractTaskLists called taskLists */
+	ISwapList<AbstractTaskList> taskLists = new SwapList<AbstractTaskList>();
 
 	/**
 	 * Constructor for a Task object. Has a name, desc, and whether or not task is recurring and or active.
@@ -28,7 +33,10 @@ public class Task {
 	 * @param active          whether or not a Task is active
 	 */
 	public Task(String taskName, String taskDescription, boolean recurring, boolean active) {
-
+		setTaskName(taskName);
+		setTaskDescription(taskDescription);
+		setRecurring(recurring);
+		setActive(active);
 	}
 
 	/**
@@ -47,6 +55,9 @@ public class Task {
 	 * @throws IllegalArgumentException if invalid name
 	 */
 	public void setTaskName(String taskName) {
+		if (taskName == null) {
+			throw new IllegalArgumentException();
+		}
 		this.taskName = taskName;
 	}
 
@@ -66,6 +77,9 @@ public class Task {
 	 * @throws IllegalArgumentException if invalid taskDescription
 	 */
 	public void setTaskDescription(String taskDescription) {
+		if (taskDescription == null) {
+			throw new IllegalArgumentException();
+		}
 		this.taskDescription = taskDescription;
 	}
 
@@ -106,12 +120,12 @@ public class Task {
 	}
 
 	/**
-	 * Returns the name of a TaskList that the Task is in
+	 * Returns the name of a TaskList that the Task is in at index 0.
 	 * 
 	 * @return the name of a TaskList
 	 */
 	public String getTaskListName() {
-		return null;
+		return taskLists.get(0).getTaskListName();
 	}
 
 	/**
@@ -121,24 +135,49 @@ public class Task {
 	 * @throws IllegalArgumentException if taskList is null
 	 */
 	public void addTaskList(AbstractTaskList taskList) {
-
+		if (taskList == null) {
+			throw new IllegalArgumentException();
+		}
+		// TODO check on how to fix: 
+		// If the AbstractTaskList is NOT already registered with the Task the AbstractTaskList is added
+		this.taskLists.add(taskList);
 	}
 
 	/**
 	 * Sets the flag on whether or not a Task has been completed
 	 */
 	public void completeTask() {
-
+		for (int i = 0; i < taskLists.size(); i++) {
+			if(isRecurring()) {
+				try {
+					Task recurring = (Task) clone();
+					taskLists.get(i).completeTask(this);
+					taskLists.get(i).addTask(recurring);;
+				} catch (CloneNotSupportedException e) {
+					// TODO what to do if clone fails
+				}
+			}
+			else {
+				taskLists.get(i).completeTask(this);
+			}	
+		}
 	}
 
 	/**
 	 * Clones a task
 	 *
 	 * @return a cloned Task
-	 * @throws CloneNotSupportedException if there is a problem cloning
+	 * @throws CloneNotSupportedException if there are no AbstractTaskLists registered with the Task
 	 */
 	public Object clone() throws CloneNotSupportedException {
-		return null;
+		// if there is an ATL associated with this task
+		if (taskLists.size() == 0) {
+			throw new CloneNotSupportedException("Cannot clone.");
+		}
+		else {
+			Task clone = this;
+			return clone;
+		}	
 	}
 
 	/**
@@ -147,7 +186,7 @@ public class Task {
 	 * @return the String representation of a Task
 	 */
 	public String toString() {
-		return null;
+		return taskName + "," + taskDescription + "," + isRecurring() + "," + isActive();
 	}
 
 }

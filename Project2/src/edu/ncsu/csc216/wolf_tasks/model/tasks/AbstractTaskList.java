@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.wolf_tasks.model.tasks;
 
 import edu.ncsu.csc216.wolf_tasks.model.util.ISwapList;
+import edu.ncsu.csc216.wolf_tasks.model.util.SwapList;
 
 /**
  * Abstract class AbstractTaskList that all other TaskLists inherit from.
@@ -17,6 +18,9 @@ public abstract class AbstractTaskList {
 	/** count of how many completed tasks in a taskList */
 	private int completedCount;
 
+	/** ISwapList of tasks */
+	ISwapList<Task> tasks = new SwapList<Task>();
+
 	/**
 	 * Constructor for an AbstractTaskList
 	 * 
@@ -27,6 +31,7 @@ public abstract class AbstractTaskList {
 	public AbstractTaskList(String name, int count) {
 		setCompletedCount(count);
 		setTaskListName(name);
+		tasks = new SwapList<Task>();
 	}
 
 	/**
@@ -42,8 +47,12 @@ public abstract class AbstractTaskList {
 	 * Sets the name of a TaskList
 	 * 
 	 * @param taskListName the taskListName to set
+	 * @throws IllegalArgumentException if the name string is empty or null
 	 */
 	public void setTaskListName(String taskListName) {
+		if (taskListName == null || taskListName.length() == 0) {
+			throw new IllegalArgumentException("Invalid name.");
+		}
 		this.taskListName = taskListName;
 	}
 
@@ -53,15 +62,19 @@ public abstract class AbstractTaskList {
 	 * @return an ISwapList of Tasks
 	 */
 	public ISwapList<Task> getTasks() {
-		return null;
+		return tasks;
 	}
 
 	/**
 	 * Sets the amount of completed tasks
 	 * 
 	 * @param completedCount the completedCount to set
+	 * @throws IllegalArgumentException if the count is less than 0
 	 */
 	private void setCompletedCount(int completedCount) {
+		if (completedCount < 0) {
+			throw new IllegalArgumentException("Invalid completed count.");
+		}
 		this.completedCount = completedCount;
 	}
 
@@ -80,7 +93,8 @@ public abstract class AbstractTaskList {
 	 * @param t the task to add
 	 */
 	public void addTask(Task t) {
-
+		tasks.add(t);
+		t.addTaskList(this);
 	}
 
 	/**
@@ -90,7 +104,7 @@ public abstract class AbstractTaskList {
 	 * @return the Task that was removed
 	 */
 	public Task removeTask(int index) {
-		return null;
+		return tasks.remove(index);
 	}
 
 	/**
@@ -100,16 +114,23 @@ public abstract class AbstractTaskList {
 	 * @return the Task at a given index
 	 */
 	public Task getTask(int index) {
-		return null;
+		return tasks.get(index);
 	}
 
 	/**
-	 * Sets the flag of a task to Completed
+	 * Sets the flag of a task to Completed. Iterates over the list of Tasks to find
+	 * a task, then remove it and increment completed counter
 	 * 
 	 * @param t the Task to set as Complete
 	 */
 	public void completeTask(Task t) {
-
+		for (int i = 0; i < tasks.size(); i++) {
+			// NOTE: the writeup said to use == instead of .equals, so we will have to see if this works
+			if (tasks.get(i) == t) {
+				tasks.remove(i);
+				completedCount++;
+			}
+		}
 	}
 
 	/**
