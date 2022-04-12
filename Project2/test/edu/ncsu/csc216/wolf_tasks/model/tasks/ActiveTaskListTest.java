@@ -23,7 +23,6 @@ public class ActiveTaskListTest {
 		assertEquals("Active Tasks", a.getTaskListName());
 		assertEquals(0, a.getCompletedCount());	
 	}
-
 	/**
 	 * Tests ActiveTaskList.addTask()
 	 */
@@ -31,10 +30,14 @@ public class ActiveTaskListTest {
 	void testAddTask() {
 		ActiveTaskList a = new ActiveTaskList();
 		Task t = new Task("Name", "Description", false, true);
+		Task t2 = new Task("Name", "Description", false, false);
 		
 		assertEquals(0, a.getTasksAsArray().length);
 		a.addTask(t);
 		assertEquals(1, a.getTasksAsArray().length);
+		
+		// test adding a task to the list that is not Active
+		assertThrows(IllegalArgumentException.class, () -> a.addTask(t2));
 	}
 	
 	/**
@@ -45,8 +48,7 @@ public class ActiveTaskListTest {
 		ActiveTaskList a = new ActiveTaskList();
 		
 		assertEquals("Active Tasks", a.getTaskListName());
-		a.setTaskListName("Test");
-		assertEquals("Test", a.getTaskListName());
+		assertThrows(IllegalArgumentException.class, () -> a.setTaskListName("Test"));
 	}
 	
 	/**
@@ -63,11 +65,10 @@ public class ActiveTaskListTest {
 		a.addTask(task1);
 		a.addTask(task2);
 		a.addTask(task3);
-		// TODO find how these strings are represented
 		
-		assertEquals("Name1", a.getTasksAsArray()[0][0]);
-		assertEquals("Description2", a.getTasksAsArray()[1][0]);
-		assertEquals("Name3", a.getTasksAsArray()[2][0]);
+		assertEquals("Active Tasks", a.getTasksAsArray()[0][0]);
+		assertEquals("Name2", a.getTasksAsArray()[1][1]);
+		assertEquals("Active Tasks", a.getTasksAsArray()[2][0]);
 	}
 	
 	/**

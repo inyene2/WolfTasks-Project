@@ -73,9 +73,9 @@ public class ActiveTaskList extends AbstractTaskList {
 		
 //		new ActiveTaskList();
 //		
-//		for (int i = 0; i < getTasks().size(); i++) {
-//			this.tasks.remove(i);
-//		}
+		for (int i = 0; i < getTasks().size(); i++) {
+			this.tasks.remove(i);
+		}
 	}
 
 }

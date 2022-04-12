@@ -21,6 +21,10 @@ public class TaskListTest {
 		
 		assertEquals(0, t.getCompletedCount());
 		assertEquals("Name", t.getTaskListName());
+		
+		assertThrows(IllegalArgumentException.class, () -> t.setTaskListName(null));
+		assertThrows(IllegalArgumentException.class, () -> new TaskList("", 0));
+		assertThrows(IllegalArgumentException.class, () -> new TaskList("Name", -1));
 	}
 	
 	/**
@@ -37,11 +41,10 @@ public class TaskListTest {
 		t.addTask(task1);
 		t.addTask(task2);
 		t.addTask(task3);
-		// TODO find how these strings are represented
 		
-		assertEquals("Name1", t.getTasksAsArray()[0][0]);
-		assertEquals("Description2", t.getTasksAsArray()[1][0]);
-		assertEquals("Name3", t.getTasksAsArray()[2][0]);
+		assertEquals("1", t.getTasksAsArray()[0][0]);
+		assertEquals("Name2", t.getTasksAsArray()[1][1]);
+		assertEquals("3", t.getTasksAsArray()[2][0]);
 	}
 	
 	/**
@@ -52,6 +55,8 @@ public class TaskListTest {
 		TaskList t = new TaskList("Name", 0);
 		TaskList t2 = new TaskList("Name2", 1);
 		TaskList t3 = new TaskList("Name2", 1);
+		
+		// TODO figure out how to compare less than, greater than
 		
 		//different where first is less than second
 		assertEquals(-1, t.compareTo(t2));

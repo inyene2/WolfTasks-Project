@@ -24,6 +24,9 @@ public class TaskTest {
 		assertEquals("Description", t.getTaskDescription());
 		assertTrue(t.isRecurring());
 		assertFalse(t.isActive());
+		
+		assertThrows(IllegalArgumentException.class, () -> new Task(null, "Description", true, false));
+		assertThrows(IllegalArgumentException.class, () -> new Task("Name", null, true, false));
 	}
 
 	/**
@@ -172,6 +175,6 @@ public class TaskTest {
 	void testToString() {
 		Task t = new Task("Name", "Task description", true, false);
 		
-		assertEquals("Name, Task description, true, false", t.toString());
+		assertEquals("Name,Task description,true,false", t.toString());
 	}
 }
