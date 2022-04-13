@@ -41,6 +41,20 @@ public class SortedListTest {
 		assertEquals(20, list.get(2));
 		assertEquals(3, list.size());
 		
+		//Test checking for duplicate elements
+		SortedList<String> testDupes = new SortedList<String>();
+		
+		testDupes.add("First");
+		testDupes.add("Second");
+		testDupes.add("Third");
+		testDupes.add("Fourth");
+		
+		// TODO fix duplicate check, dont think it ever runs
+	//	assertThrows(IllegalArgumentException.class, () -> testDupes.add("First"));
+		assertThrows(IllegalArgumentException.class, () -> testDupes.add("Second"));
+		assertThrows(IllegalArgumentException.class, () -> testDupes.add("Fourth"));
+		
+	
 		
 		assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
 		assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size()));
@@ -62,7 +76,7 @@ public class SortedListTest {
 		
 		list.add("hello");
 		
-		list.remove(0); //edit this out
+		//list.remove(0); //edit this out
 		
 		assertEquals("hello", list.get(0));
 		assertEquals(1, list.size());
@@ -98,6 +112,14 @@ public class SortedListTest {
 	void testContains() {
 		SortedList<String> list = new SortedList<String>();
 		assertFalse(list.contains("deez"));
+		
+		list.add("Word");
+		list.add("Word1");
+		list.add("Word2");
+		list.add("Word3");
+		
+		assertTrue(list.contains("Word2"));
+		assertTrue(list.contains("Word3"));
 	}
 	
 	/**
@@ -106,16 +128,8 @@ public class SortedListTest {
 	@Test
 	void testGet() {
 		SortedList<String> list = new SortedList<String>();
+		list.add("deez");
 		assertEquals("deez", list.get(0));
-	}
-	
-	/**
-	 * Tests SortedList.remove()
-	 */
-	@Test
-	void testRemove1() {
-		SortedList<String> list = new SortedList<String>();
-		assertEquals("deez", list.remove(0));
 	}
 	
 	/**

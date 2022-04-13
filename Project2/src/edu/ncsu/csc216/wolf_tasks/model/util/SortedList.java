@@ -1,7 +1,5 @@
 package edu.ncsu.csc216.wolf_tasks.model.util;
 
-
-
 /**
  * SortedList utility class for sorted elements
  * 
@@ -12,11 +10,19 @@ package edu.ncsu.csc216.wolf_tasks.model.util;
  */
 public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 
-	/** Size field of the List, how much the list is populated */
+	/** Size field of the List, how many elements are in the List */
 	private int size;
-	
+
 	/** Front of the list */
 	private ListNode front;
+
+	/**
+	 * Constructs a new LinkedList that is sorted, the constructor for SortedList
+	 */
+	public SortedList() {
+		this.front = null;
+		this.size = 0;
+	}
 
 	/**
 	 * Adds an element to the list
@@ -27,19 +33,33 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public void add(E element) {
-		int n = 0;
-		if (n == 0)
-			size();
-	
+		if (element == null) {
+			throw new NullPointerException("Cannot add null element.");
+		}
+
+		// Case of sorting an element to the front whether front is empty or front is
+		// less than added element
+		if (front == null || element.compareTo(front.data) < 0) {
+			front = new ListNode(element, front);
+		} else {
+			ListNode current = front;
+
+			// Traverse list
+			while (current.next != null && current.next.data.compareTo(element) < 0) {
+				// check for duplicate at current non-null ListNode
+				if (current.data.equals(element) || current.next.data.equals(element)) {
+					throw new IllegalArgumentException("Cannot add duplicate element");
+				}
+				current = current.next;
+			}
+
+			// While loop terminates when we need to insert
+			current.next = new ListNode(element, current.next);
+		}
+
+		size++;
+
 	}
-//		ListNode current = front;
-////			while (current.next != null) {
-////				current = current.next;
-////			}
-//			ListNode n = new ListNode(element, null);
-//			//current.next = n;
-//		}
-//		
 
 	/**
 	 * Removes an element from the list
@@ -49,25 +69,39 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public E remove(int idx) {
-//		ListNode current = front;
-////		for (int i = 0; i < idx - 1; i++) {
-////			current = current.next;
-////		}
-		E element = null; //current.next.data;
-//		current.next = current.next.next;
-		
-		return element;
-		
+		checkIndex(idx);
+		E tempReturn = null;
+
+		// Remove at front
+		if (idx == 0) {
+			tempReturn = front.data;
+			front = front.next;
+		} else {
+			// Traverse through list until reaching item at index
+			ListNode current = front;
+			for (int i = 0; i < idx - 1; i++) {
+				current = current.next;
+			}
+			tempReturn = current.next.data;
+			// Shift
+			current.next = current.next.next;
+		}
+		// Decrement size
+		size--;
+		return tempReturn;
+
 	}
 
 	/**
 	 * Checks the data of a given Index
 	 * 
-	 * @param index the index to check
+	 * @param idx the index to check
 	 * @throws IndexOutOfBoundsException if index out of bounds for list
 	 */
-	private void checkIndex(int index) {
-		get(index);
+	private void checkIndex(int idx) {
+		if (idx < 0 || idx >= size()) {
+			throw new IndexOutOfBoundsException("Invalid index.");
+		}
 	}
 
 	/**
@@ -78,14 +112,18 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public boolean contains(E element) {
-		checkIndex(0);
 		ListNode current = front;
-		while (current.next != null) {
-//			if (element.equals(current.data)) {
-//				return true;
-//			}
+
+		// Traverse
+		for (int i = 0; i < size() - 1; i++) {
 			current = current.next;
+			if (element.equals(current.data)) {
+				// Found element
+				return true;
+			}
 		}
+
+		// Didn't find
 		return false;
 	}
 
@@ -98,12 +136,15 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public E get(int idx) {
-//		ListNode current = front;
-////		for (int i = 0; i < idx; i++) {
-////			current = current.next;
-////		}
-		E element = null; //current.data;
-		return element;
+		checkIndex(idx);
+		ListNode current = front;
+
+		// Traverse list
+		for (int i = 0; i < idx; i++) {
+			current = current.next;
+		}
+		
+		return current.data;
 	}
 
 	/**
@@ -126,7 +167,6 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		/** The data contained in a ListNode */
 		public E data;
 
-		
 		/** The next ListNode to refer to */
 		public ListNode next;
 
