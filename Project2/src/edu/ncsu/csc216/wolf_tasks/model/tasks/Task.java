@@ -25,7 +25,8 @@ public class Task implements Cloneable {
 	ISwapList<AbstractTaskList> taskLists = new SwapList<AbstractTaskList>();
 
 	/**
-	 * Constructor for a Task object. Has a name, desc, and whether or not task is recurring and or active.
+	 * Constructor for a Task object. Has a name, desc, and whether or not task is
+	 * recurring and or active.
 	 * 
 	 * @param taskName        the name of a Task
 	 * @param taskDescription the description of a Task
@@ -138,8 +139,9 @@ public class Task implements Cloneable {
 		if (taskList == null) {
 			throw new IllegalArgumentException();
 		}
-		// TODO check on how to fix: 
-		// If the AbstractTaskList is NOT already registered with the Task the AbstractTaskList is added
+		// TODO check on how to fix:
+		// If the AbstractTaskList is NOT already registered with the Task the
+		// AbstractTaskList is added
 		this.taskLists.add(taskList);
 	}
 
@@ -147,37 +149,41 @@ public class Task implements Cloneable {
 	 * Sets the flag on whether or not a Task has been completed
 	 */
 	public void completeTask() {
-		for (int i = 0; i < taskLists.size(); i++) {
-			if(isRecurring()) {
-				try {
-					Task recurring = (Task) clone();
-					taskLists.get(i).completeTask(this);
-					taskLists.get(i).addTask(recurring);;
-				} catch (CloneNotSupportedException e) {
-					// TODO what to do if clone fails
+		Task clonedTask;
+		try {
+			clonedTask = (Task) clone();
+			for (int i = 0; i < taskLists.size(); i++) {
+				taskLists.get(i).completeTask(this);
+				if (isRecurring()) {
+					taskLists.get(i).addTask(clonedTask);
 				}
 			}
-			else {
-				taskLists.get(i).completeTask(this);
-			}	
+		} catch (CloneNotSupportedException e) {
+			// Do nothing
 		}
+		
 	}
 
 	/**
 	 * Clones a task
 	 *
 	 * @return a cloned Task
-	 * @throws CloneNotSupportedException if there are no AbstractTaskLists registered with the Task
+	 * @throws CloneNotSupportedException if there are no AbstractTaskLists
+	 *                                    registered with the Task
 	 */
 	public Object clone() throws CloneNotSupportedException {
 		// if there is an ATL associated with this task
-		if (taskLists.size() == 0) {
+		if (taskLists.size() <= 0) {
 			throw new CloneNotSupportedException("Cannot clone.");
+		} 
+		
+		Task clone = new Task(taskName, taskDescription, recurring, active);
+		
+		for (int i = 0; i < taskLists.size(); i++) {
+			clone.addTaskList(taskLists.get(i));
 		}
-		else {
-			Task clone = this;
-			return clone;
-		}	
+		
+		return clone;
 	}
 
 	/**

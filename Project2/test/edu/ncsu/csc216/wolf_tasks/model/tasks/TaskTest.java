@@ -157,11 +157,19 @@ public class TaskTest {
 	 */
 	@Test
 	void testClone() {
+		TaskList taskList = new TaskList("List1", 0);
 		Task t = new Task("Name", "Task description", true, false);
+		
+		taskList.addTask(t);
 		
 		try {
 			Task t2 = (Task) t.clone();
-			assertEquals(t2, t);
+			String tString = t.toString();
+			String tString2 = t2.toString();
+			assertEquals(tString2, tString);
+			
+			//make sure the task gets readded to the taskList since it is recurring
+			assertEquals(tString2, taskList.getTasks().get(0).toString());
 		} catch (CloneNotSupportedException e) {
 			fail("Clone not supported.");
 		}
