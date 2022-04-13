@@ -16,42 +16,49 @@ public class SwapList<E> implements ISwapList<E> {
 	/** List of generic type E */
 	private E[] list;
 
-	/** Size field of the List, how much the list is populated */
+	/** Size field of the List, how many elements are in the list */
 	private int size;
 
-	/** Suppress warning */
+	/**
+	 * Generic constructor for a SwapList. Sets initial capacity to 10, and sets the
+	 * size to 0
+	 */
 	@SuppressWarnings("unchecked")
 	public SwapList() {
 		this.list = (E[]) new Object[INITIAL_CAPACITY];
 		this.size = 0;
-
 	}
 
 	/**
 	 * Adds an element to the List
+	 * 
 	 * @param element element to add
 	 * @throws NullPointerException if element is null
 	 */
 	@Override
 	public void add(E element) {
-		if (size == 0) {
-			list[0] = element;
-		} else {
-			list[1] = element;
+		if (element == null) {
+			throw new NullPointerException("Cannot add null element.");
 		}
-
+		checkCapacity(size() + 1);
+		list[size++] = element;
 	}
 
 	/**
-	 * Checks the capacity
+	 * Checks the capacity when being used in the add method. Makes sure there is
+	 * room in the list before adding
 	 * 
-	 * @param cap capacity to check
+	 * @param cap capacity to check is valid
 	 */
+	@SuppressWarnings("unchecked")
 	private void checkCapacity(int cap) {
-		if (cap < 10 || cap > 250) {
-			throw new IllegalArgumentException();
+		if (size >= list.length) {
+			E[] doubledList = (E[]) new Object[list.length * 2];
+			for (int i = 0; i < list.length; i++) {
+				doubledList[i] = list[i];
+			}
+			list = doubledList;
 		}
-		
 	}
 
 	/**
@@ -63,28 +70,28 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public E remove(int idx) {
-		checkCapacity(0);
-		// get output E
-		E output = list[idx];
+		// check for valid index
+		checkIndex(idx);
+		E temp = get(idx);
 		// left shift
-		for (int j = idx; j < this.size; j++) {
-			list[j] = list[j + 1];
+		for (int i = idx; i < size; i++) {
+			list[i] = list[i + 1];
 		}
-		// update size
+		// decrement size
 		size--;
-
-		// return E
-		return output;
+		return temp;
 	}
 
 	/**
-	 * Checks the element at a given index
+	 * Checks the element at a given index for use in the remove() method
 	 * 
 	 * @param index the index to check
 	 * @throws IndexOutOfBoundsException if idx out of bounds for list
 	 */
 	private void checkIndex(int index) {
-		
+		if (index < 0 || index >= size()) {
+			throw new IndexOutOfBoundsException("Invalid index.");
+		}
 	}
 
 	/**
@@ -95,11 +102,13 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveUp(int idx) {
-		checkIndex(0);
-		E temp = list[idx - 1];
-		list[idx - 1] = list[idx];
-		list[idx] = temp;
-
+		checkIndex(idx);
+		// Case of indexed item already being at front
+		if (idx != 0) {
+			E temp = list[idx - 1];
+			list[idx - 1] = list[idx];
+			list[idx] = temp;
+		}
 	}
 
 	/**
@@ -110,10 +119,13 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveDown(int idx) {
-		E temp = list[idx + 1];
-		list[idx + 1] = list[idx];
-		list[idx] = temp;
-
+		checkIndex(idx);
+		// Case of indexed item already being at back
+		if (idx != size() - 1) {
+			E temp = list[idx + 1];
+			list[idx + 1] = list[idx];
+			list[idx] = temp;
+		}
 	}
 
 	/**
@@ -124,9 +136,13 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveToFront(int idx) {
-		E temp = list[0];
-		list[0] = list[idx];
-		list[idx] = temp;
+		checkIndex(idx);
+		// Case of indexed item already being at front
+		if (idx != 0) {
+			E temp = list[0];
+			list[0] = list[idx];
+			list[idx] = temp;
+		}
 
 	}
 
@@ -138,10 +154,13 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveToBack(int idx) {
-		E temp = list[size() - 1];
-		list[size() - 1] = list[idx];
-		list[idx] = temp;
-
+		checkIndex(idx);
+		// Case of indexed item already being at back
+		if (idx != size() - 1) {
+			E temp = list[size() - 1];
+			list[size() - 1] = list[idx];
+			list[idx] = temp;
+		}
 	}
 
 	/**
@@ -149,10 +168,11 @@ public class SwapList<E> implements ISwapList<E> {
 	 *
 	 * @param idx the index to get from
 	 * @return the element at the given index
-	 * 
+	 * @throws IndexOutOfBoundsException if the index is OOB
 	 */
 	@Override
 	public E get(int idx) {
+		checkIndex(idx);
 		return list[idx];
 	}
 

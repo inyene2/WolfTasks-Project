@@ -20,28 +20,26 @@ public class SwapListTest {
 		SwapList<Integer> list = new SwapList<Integer>();
 		assertEquals(0, list.size());
 		
-		//adding to beginning
+		//test adding and getting
 		list.add(10);
 		assertEquals(10, list.get(0));
 		assertEquals(1, list.size());
 		
-		//adding to end
 		list.add(20);
 		assertEquals(10, list.get(0));
 		assertEquals(20, list.get(1));
 		assertEquals(2, list.size());
 		
-		//adding to middle
-		list.add(15);
+		list.add(30);
 		assertEquals(10, list.get(0));
-		assertEquals(15, list.get(1));
-		assertEquals(20, list.get(2));
+		assertEquals(20, list.get(1));
+		assertEquals(30, list.get(2));
 		assertEquals(3, list.size());
 		
 		
+		//test adding OOB
 		assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
 		assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size()));
-		
 		assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size() + 1));
 		
 		assertThrows(NullPointerException.class, () -> list.add(null));
@@ -66,19 +64,20 @@ public class SwapListTest {
 		
 		list.add("orange");
 		assertEquals("hello", list.get(0));
-		assertEquals("orange", list.get(1));
-		assertEquals("world", list.get(2));
+		assertEquals("world", list.get(1));
+		assertEquals("orange", list.get(2));
 		assertEquals(3, list.size());
 		
 		list.remove(0);
-		assertEquals("orange", list.get(0));
-		assertEquals("world", list.get(1));
+		assertEquals("world", list.get(0));
+		assertEquals("orange", list.get(1));
 		assertEquals(2, list.size());
 		
 		list.remove(1);
-		assertEquals("orange", list.get(0));
+		assertEquals("world", list.get(0));
 		assertEquals(1, list.size());
 		
+		//remove OOB
 		assertThrows(IndexOutOfBoundsException.class, () -> list.remove(-1));
 		assertThrows(IndexOutOfBoundsException.class, () -> list.remove(list.size() + 1));
 	}
@@ -96,6 +95,7 @@ public class SwapListTest {
 		
 		list.moveUp(2);
 		assertEquals(30, list.get(1));
+		assertEquals(20, list.get(2));
 		assertEquals(3, list.size());
 		
 		list.moveUp(1);
@@ -116,10 +116,12 @@ public class SwapListTest {
 		list.add(30);
 		
 		list.moveDown(0);
+		// should be 20, 10, 30
 		assertEquals(10, list.get(1));
 		assertEquals(3, list.size());
 		
 		list.moveDown(1);
+		// should be 20, 30, 10
 		assertEquals(20, list.get(0));
 		assertEquals(30, list.get(1));
 		assertEquals(10, list.get(2));
@@ -137,13 +139,15 @@ public class SwapListTest {
 		list.add(30);
 		
 		list.moveToFront(2);
+		// 30 and 10 swap to become 30,20,10
 		assertEquals(30, list.get(0));
 		assertEquals(3, list.size());
 		
 		list.moveToFront(1);
-		assertEquals(10, list.get(0));
+		//30 and 20 swap to become 20, 30, 10
+		assertEquals(20, list.get(0));
 		assertEquals(30, list.get(1));
-		assertEquals(20, list.get(2));
+		assertEquals(10, list.get(2));
 		assertEquals(3, list.size());
 	}
 	
@@ -158,13 +162,15 @@ public class SwapListTest {
 		list.add(30);
 		
 		list.moveToBack(0);
+		// 10 and 30 swap to become 30, 20, 10
 		assertEquals(10, list.get(2));
 		assertEquals(3, list.size());
 		
 		list.moveToBack(1);
-		assertEquals(20, list.get(0));
+		// 20 and 10 swap to become 30, 10, 20
+		assertEquals(30, list.get(0));
 		assertEquals(10, list.get(1));
-		assertEquals(30, list.get(2));
+		assertEquals(20, list.get(2));
 		assertEquals(3, list.size());
 	}
 	
