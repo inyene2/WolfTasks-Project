@@ -44,21 +44,24 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		} else {
 			ListNode current = front;
 
-			// Traverse list
+			// Traverse through list until condition fails
 			while (current.next != null && current.next.data.compareTo(element) < 0) {
-				// check for duplicate at current non-null ListNode
-				if (current.data.equals(element) || current.next.data.equals(element)) {
-					throw new IllegalArgumentException("Cannot add duplicate element");
-				}
 				current = current.next;
 			}
 
-			// While loop terminates when we need to insert
+			// While loop terminates when it finds a place to add
+			// Checks for duplicate at current spot and then the next spot, since the only
+			// place a duplicate can be is those locations
+			if (current.data == element || current.next != null && current.next.data == element) {
+				throw new IllegalArgumentException("Cannot add duplicate element");
+			}
+
+			// Add
 			current.next = new ListNode(element, current.next);
 		}
 
+		// Increment size
 		size++;
-
 	}
 
 	/**
@@ -143,7 +146,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		for (int i = 0; i < idx; i++) {
 			current = current.next;
 		}
-		
+
 		return current.data;
 	}
 

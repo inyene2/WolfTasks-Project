@@ -45,12 +45,13 @@ public class SortedListTest {
 		SortedList<String> testDupes = new SortedList<String>();
 		
 		testDupes.add("First");
+		assertThrows(IllegalArgumentException.class, () -> testDupes.add("First"));
+		
 		testDupes.add("Second");
 		testDupes.add("Third");
 		testDupes.add("Fourth");
 		
-		// TODO fix duplicate check, dont think it ever runs
-	//	assertThrows(IllegalArgumentException.class, () -> testDupes.add("First"));
+		assertThrows(IllegalArgumentException.class, () -> testDupes.add("First"));
 		assertThrows(IllegalArgumentException.class, () -> testDupes.add("Second"));
 		assertThrows(IllegalArgumentException.class, () -> testDupes.add("Fourth"));
 		
