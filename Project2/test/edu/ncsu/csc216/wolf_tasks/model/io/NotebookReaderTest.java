@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.wolf_tasks.model.notebook.Notebook;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.Task;
+import edu.ncsu.csc216.wolf_tasks.model.tasks.TaskList;
 
 /**
  * Tests NotebookReader class
@@ -41,6 +42,12 @@ class NotebookReaderTest {
 	 * tasks lists
 	 */
 	private final File validTestFile4 = new File("test-files/notebook6.txt");
+	
+	/**
+	 * Valid notebook file 5 task list with missing name - creates notebook with no
+	 * tasks lists
+	 */
+	private final File validTestFile5 = new File("test-files/notebook7.txt");
 
 	/** Invalid notebook file */
 	private final File invalidTestFile = new File("test-files/notebook3.txt");
@@ -105,6 +112,12 @@ class NotebookReaderTest {
 		assertEquals("Personal", n3.getNotebookName());
 		//has empty active task list and thats it
 		assertEquals(1, n3.getTaskListsNames().length);
+		
+		Notebook n4 = NotebookReader.readNotebookFile(validTestFile5);
+		assertEquals("Personal", n4.getNotebookName());
+		n4.setCurrentTaskList("Habits");
+		//has one task list with a single task -- skips first
+		assertEquals(1, n4.getCurrentTaskList().getTasks().size());
 	}
 
 }

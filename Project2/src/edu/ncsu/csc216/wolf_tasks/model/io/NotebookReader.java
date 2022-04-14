@@ -88,7 +88,12 @@ public class NotebookReader {
 			// break tasklist into "task tokens"
 			scnr.useDelimiter("\\r?\\n?[*]");
 			while (scnr.hasNext()) {
-				processTask(t, scnr.next());
+				//handle task problems
+				try {
+					processTask(t, scnr.next());
+				} catch (Exception e) {
+					continue;
+				}
 			}
 
 			return t;
@@ -109,6 +114,7 @@ public class NotebookReader {
 	 * @param taskList   a TaskList to read in and process
 	 * @param taskString a Task in the form of a scanned String
 	 * @return a Task object
+	 * @throws IllegalArgumentException if the task string has faulty params
 	 */
 	private static Task processTask(AbstractTaskList taskList, String taskString) {
 		String taskFields = taskString.substring(1);
@@ -121,6 +127,13 @@ public class NotebookReader {
 		Scanner taskFieldsScnr = new Scanner(nameAndFields);
 		taskFieldsScnr.useDelimiter(",");
 		String name = taskFieldsScnr.next();
+
+		// handle case of no name
+		if ("active".equals(name) || "recurring".equals(name)) {
+			taskScanner.close();
+			taskFieldsScnr.close();
+			throw new IllegalArgumentException("Invalid task");
+		}
 
 		if (taskFieldsScnr.hasNext()) {
 			String next = taskFieldsScnr.next();
