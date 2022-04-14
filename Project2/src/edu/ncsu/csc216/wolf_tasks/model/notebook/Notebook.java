@@ -43,7 +43,7 @@ public class Notebook {
 	 */
 	public Notebook(String name) {
 		if (name == null || name.isEmpty() || "Active Tasks".equals(name)) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Invalid name.");
 		}
 		setNotebookName(name);
 		taskLists = new SortedList<TaskList>();
@@ -189,11 +189,11 @@ public class Notebook {
 	public void editTaskList(String name) {
 		// checks if currentTaskList is an activeTaskList
 		if (this.currentTaskList == this.activeTaskList) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("The Active Tasks list may not be edited.");
 		}
 		// checks if name = "Active Tasks"
 		if ("Active Tasks".equals(name)) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Invalid name.");
 		}
 		// checks if name is duplicate name of other tasklist
 		for (int i = 0; i < this.taskLists.size(); i++) {
