@@ -63,6 +63,8 @@ class NotebookReaderTest {
 
 		Notebook n = NotebookReader.readNotebookFile(validTestFile1);
 
+		assertEquals(5, n.getCurrentTaskList().getTasks().size());
+		
 		assertEquals("School", n.getNotebookName());
 		assertEquals("CSC 216", n.getTaskListsNames()[1]);
 		n.setCurrentTaskList("CSC 216");
@@ -124,7 +126,7 @@ class NotebookReaderTest {
 		// TODO figure out why notebook 7 works for ignoring on here but not on jenkins
 		assertEquals(1, n4.getCurrentTaskList().getTasks().size());
 		n4.setCurrentTaskList("Active Tasks");
-		assertEquals(0, n4.getCurrentTaskList().getTasks().size());
+		assertEquals(1, n4.getCurrentTaskList().getTasks().size());
 	}
 
 }

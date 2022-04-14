@@ -9,6 +9,8 @@ import edu.ncsu.csc216.wolf_tasks.model.notebook.Notebook;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.AbstractTaskList;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.Task;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.TaskList;
+import edu.ncsu.csc216.wolf_tasks.model.util.ISwapList;
+import edu.ncsu.csc216.wolf_tasks.model.util.SwapList;
 
 /**
  * This is the WolfTasks input class, NotebookReader. Reads in a notebook from a
@@ -50,19 +52,18 @@ public class NotebookReader {
 				if (t == null) {
 					Notebook brokenTasks = new Notebook(name);
 					return brokenTasks;
-				}
-//				n.setCurrentTaskList("Active Tasks");
-//				for (int i = 0; i < t.getTasks().size(); i++) {
-//					if (t.getTask(i).isActive()) {
-//						n.getCurrentTaskList().addTask(t.getTask(i));
-//					}
-//				}
+				}			
+				
+				updateActiveTaskList(n, t);
+				
 				n.addTaskList(t);
 			}
 			// Close the Scanner b/c we're responsible with our file handles
 			fileReader.close();
 			
 			n.setCurrentTaskList("Active Tasks");
+			
+			
 			
 			return n;
 
@@ -180,6 +181,22 @@ public class NotebookReader {
 
 		taskScanner.close();
 		return t;
+	}
+	
+	/**
+	 * Private helper method for updating the ActiveTaskList of a Notebook
+	 * 
+	 * @param n the notebook to update
+	 * @param taskList the taskList to copy active Tasks into
+	 */
+	private static void updateActiveTaskList(Notebook n, AbstractTaskList taskList) {
+		n.setCurrentTaskList("Active Tasks");
+		ISwapList<Task> tasks = taskList.getTasks();
+		for (int i = 0; i < tasks.size(); i++) {
+			if(tasks.get(i).isActive()) {
+				n.getCurrentTaskList().addTask(tasks.get(i));
+			}
+		}
 	}
 
 }
