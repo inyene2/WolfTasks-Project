@@ -98,7 +98,7 @@ public class NotebookTest {
 		Task t = new Task("Name", "Task description", true, false);
 		taskList.addTask(t);
 		
-		assertEquals(0, n.getTaskListsNames().length);
+		assertEquals(1, n.getTaskListsNames().length);
 		
 		n.addTaskList(taskList);
 		
@@ -115,7 +115,7 @@ public class NotebookTest {
 		TaskList taskList = new TaskList("List1", 0);
 		TaskList taskList2 = new TaskList("List2", 0);
 		
-		assertEquals(0, n.getTaskListsNames().length);
+		assertEquals(1, n.getTaskListsNames().length);
 		
 		n.addTaskList(taskList);
 		n.addTaskList(taskList2);
@@ -183,7 +183,7 @@ public class NotebookTest {
 		TaskList taskList = new TaskList("List1", 0);
 		TaskList taskList2 = new TaskList("List2", 0);
 		
-		assertEquals(0, n.getTaskListsNames().length);
+		assertEquals(1, n.getTaskListsNames().length);
 		
 		n.addTaskList(taskList);
 		n.addTaskList(taskList2);
@@ -205,7 +205,7 @@ public class NotebookTest {
 		Task t = new Task("Name", "Task description", true, false);
 		taskList.addTask(t);
 		
-		assertEquals(0, n.getTaskListsNames().length);
+		assertEquals(1, n.getTaskListsNames().length);
 		
 		n.addTaskList(taskList);
 		n.setCurrentTaskList("List1");
@@ -223,7 +223,7 @@ public class NotebookTest {
 		Task t = new Task("Name", "Task description", true, false);
 		taskList.addTask(t);
 		
-		assertEquals(0, n.getTaskListsNames().length);
+		assertEquals(1, n.getTaskListsNames().length);
 		
 		n.addTaskList(taskList);
 		n.setCurrentTaskList("List1");
