@@ -38,7 +38,7 @@ public class NotebookReader {
 			}
 
 			// TODO handle empty file or ! with nothing after
-			
+
 			// remove exclamation point
 			String name = nameLine.substring(2);
 
@@ -47,6 +47,10 @@ public class NotebookReader {
 			fileReader.useDelimiter("\\r?\\n?[#]");
 			while (fileReader.hasNext()) {
 				TaskList t = processTaskList(fileReader.next());
+				if (t == null) {
+					Notebook brokenTasks = new Notebook(name);
+					return brokenTasks;
+				}
 				n.addTaskList(t);
 			}
 			// Close the Scanner b/c we're responsible with our file handles
@@ -73,20 +77,29 @@ public class NotebookReader {
 		Scanner scnr1 = new Scanner(taskListFields);
 		scnr1.useDelimiter(",");
 		String taskListName = scnr1.next().trim();
+		if (!scnr1.hasNextInt()) {
+			scnr.close();
+			scnr1.close();
+			return null;
+		}
 		int count = scnr1.nextInt();
-		TaskList t = new TaskList(taskListName, count);
+		try {
+			TaskList t = new TaskList(taskListName, count);
+			// break tasklist into "task tokens"
+			scnr.useDelimiter("\\r?\\n?[*]");
+			while (scnr.hasNext()) {
+				processTask(t, scnr.next());
+			}
 
-		// break tasklist into "task tokens"
-		scnr.useDelimiter("\\r?\\n?[*]");
-		while (scnr.hasNext()) {
-			processTask(t, scnr.next());
+			return t;
+		} catch (Exception e) {
+			return null;
+		} finally {
+			// close scanners
+			scnr.close();
+			scnr1.close();
 		}
 
-		// close scanners
-		scnr.close();
-		scnr1.close();
-
-		return t;
 	}
 
 	/**
@@ -109,22 +122,12 @@ public class NotebookReader {
 		taskFieldsScnr.useDelimiter(",");
 		String name = taskFieldsScnr.next();
 
-		// cases of if there is only active and no recurring
-//		while (taskFieldsScnr.hasNext()) {
-//			//only active and no recurring
-//			if ("active".equals(taskFieldsScnr.next())) {
-//				isActive = true;
-//				isRecurring = false;
-//				break;
-//			}
-//			else if ("recurring".equals(taskFieldsScnr.next()))
-//		}
 		if (taskFieldsScnr.hasNext()) {
 			String next = taskFieldsScnr.next();
 			// only active, nothing else after
 			if ("active".equals(next)) {
 				isActive = true;
-				//cant have recurring afterwards
+				// cant have recurring afterwards
 				isRecurring = false;
 			}
 			// can be recurring and then check if there is a next
@@ -137,7 +140,7 @@ public class NotebookReader {
 				}
 			}
 		}
-		
+
 		taskFieldsScnr.close();
 
 		String description = "";
@@ -147,7 +150,7 @@ public class NotebookReader {
 		while (taskScanner.hasNextLine()) {
 			description += taskScanner.nextLine().trim() + "\n";
 		}
-		
+
 		Task t = new Task(name, description, isRecurring, isActive);
 		taskList.addTask(t);
 

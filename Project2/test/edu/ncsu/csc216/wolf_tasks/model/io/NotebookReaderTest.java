@@ -28,7 +28,19 @@ class NotebookReaderTest {
 	 * Valid notebook file 5 task list with missing name - creates notebook with no
 	 * tasks lists
 	 */
-	private final File validTestFile2 = new File("test-files/notebook5.txt");
+	private final File validTestFile2 = new File("test-files/notebook4.txt");
+	
+	/**
+	 * Valid notebook file 5 task list with missing name - creates notebook with no
+	 * tasks lists
+	 */
+	private final File validTestFile3 = new File("test-files/notebook5.txt");
+	
+	/**
+	 * Valid notebook file 5 task list with missing name - creates notebook with no
+	 * tasks lists
+	 */
+	private final File validTestFile4 = new File("test-files/notebook6.txt");
 
 	/** Invalid notebook file */
 	private final File invalidTestFile = new File("test-files/notebook3.txt");
@@ -78,6 +90,21 @@ class NotebookReaderTest {
 	@Test
 	void testReadInvalidNotebookFile() {
 		assertThrows(IllegalArgumentException.class, () -> NotebookReader.readNotebookFile(invalidTestFile));
+		
+		Notebook n = NotebookReader.readNotebookFile(validTestFile2);
+		assertEquals("Personal", n.getNotebookName());
+		//has empty active task list and thats it
+		assertEquals(1, n.getTaskListsNames().length);
+		
+		Notebook n2 = NotebookReader.readNotebookFile(validTestFile3);
+		assertEquals("Personal", n2.getNotebookName());
+		//has empty active task list and thats it
+		assertEquals(1, n2.getTaskListsNames().length);
+		
+		Notebook n3 = NotebookReader.readNotebookFile(validTestFile4);
+		assertEquals("Personal", n3.getNotebookName());
+		//has empty active task list and thats it
+		assertEquals(1, n3.getTaskListsNames().length);
 	}
 
 }
