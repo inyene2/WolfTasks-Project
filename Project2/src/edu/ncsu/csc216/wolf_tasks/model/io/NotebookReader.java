@@ -32,11 +32,13 @@ public class NotebookReader {
 			Scanner fileReader = new Scanner(new FileInputStream(file));
 			String nameLine = fileReader.nextLine();
 
-			if (nameLine.charAt(0) != '!') {
+			if (nameLine.charAt(0) != '!' || nameLine.length() == 0) {
 				fileReader.close();
-				throw new IllegalArgumentException("Name must start with exclamation point");
+				throw new IllegalArgumentException("Unable to load file.");
 			}
 
+			// TODO handle empty file or ! with nothing after
+			
 			// remove exclamation point
 			String name = nameLine.substring(2);
 
