@@ -28,65 +28,36 @@ public class NotebookReader {
 	 * @throws IllegalArgumentException if can't read from file
 	 */
 	public static Notebook readNotebookFile(File file) {
-		processTask(processTaskList(""), "");
-		// return null;
-
-		String tempLines = "";
-
-//		try {
-//			Scanner fileReader = new Scanner(new FileInputStream(file));
-//			String nameLine = fileReader.nextLine();
-//
-//			// Check first line for exclamation point
-//			Scanner nameScanner = new Scanner(nameLine);
-//			if (!nameScanner.next().equals("!")) {
-//				nameScanner.close();
-//				throw new IllegalArgumentException("Name must start with exclamation point");
-//			}
-//
-//			// advance scanner past exclamation point
-//			nameScanner.next();
-//			String name = nameScanner.next();
-//			nameScanner.close();
-//
-//			// Create notebook with read name
-//			Notebook n = new Notebook(name);
-//
-//			tempLines += nameLine + "\n";
-//			while (fileReader.hasNextLine()) {
-//
-//			}
-//
-//		} catch (FileNotFoundException e) {
-//			throw new IllegalArgumentException("Unable to load file.");
-//		}
-
-		// Read in Notebook file line by line
 		try {
-
 			Scanner fileReader = new Scanner(new FileInputStream(file));
-			while (fileReader.hasNextLine()) {
-				tempLines = tempLines + fileReader.nextLine() + "\n";
+			String nameLine = fileReader.nextLine();
+
+			// Check first line for exclamation point
+			Scanner nameScanner = new Scanner(nameLine);
+			if (!nameScanner.next().equals("!")) {
+				nameScanner.close();
+				throw new IllegalArgumentException("Name must start with exclamation point");
 			}
-			if (tempLines.length() == 0) {
-				// There is nothing in the file
-				throw new IllegalArgumentException();
+
+			// advance scanner past exclamation point
+			nameScanner.next();
+			String name = nameScanner.next();
+			nameScanner.close();
+
+			// Create notebook with read name
+			Notebook n = new Notebook(name);
+			fileReader.useDelimiter("\\r?\\n?[#]");
+			while (fileReader.hasNext()) {
+				TaskList t = processTaskList(fileReader.next());
+				n.addTaskList(t);
 			}
+			// Close the Scanner b/c we're responsible with our file handles
 			fileReader.close();
 
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
-		
-		// Check if the first character in the file is an exclamation point
-		if(tempLines.charAt(0) != '!') {
-			throw new IllegalArgumentException("Unable to load file.");
-		}
-		
-		Scanner scnr = new Scanner(tempLines);
-		 
 		return null;
-		
 	}
 
 	/**
@@ -96,8 +67,17 @@ public class NotebookReader {
 	 * @return a TaskList of tasks from a notebook file
 	 */
 	private static TaskList processTaskList(String taskList) {
+		Scanner scnr = new Scanner(taskList);
+		String taskListFields = scnr.nextLine();
+		Scanner scnr1 = new Scanner(taskListFields);
+		scnr1.useDelimiter(",");
+		String taskListName = scnr1.next().trim();
+		int count = scnr1.nextInt();
+		TaskList t = new TaskList(taskListName, count);
+		scnr.close();
+		scnr1.close();
 		return null;
-	}
+		}
 
 	/**
 	 * Processes a set of tasks from the TaskList read in by the processTaskList
