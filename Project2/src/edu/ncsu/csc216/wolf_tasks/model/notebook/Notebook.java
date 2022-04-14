@@ -107,11 +107,11 @@ public class Notebook {
 	 */
 	public void addTaskList(TaskList taskList) {
 		if (taskList.getTaskListName().equals("Active Tasks")) {
-			throw new IllegalArgumentException("Invalid name");
+			throw new IllegalArgumentException("Invalid name.");
 		}
 		for (int i = 0; i < this.taskLists.size(); i++) {
 			if (this.taskLists.get(i).getTaskListName().equals(taskList.getTaskListName())) {
-				throw new IllegalArgumentException("Invalid name");
+				throw new IllegalArgumentException("Invalid name.");
 			}
 		}
 		this.taskLists.add(taskList);
@@ -126,7 +126,10 @@ public class Notebook {
 	 */
 	public String[] getTaskListsNames() {
 		if (this.taskLists.size() == 0) {
-			return new String[0];
+			String[] name = new String[1];
+			name[0] = "Active Tasks";
+			return name;
+			
 		}
 		String[] names = new String[this.taskLists.size() + 1];
 		names[0] = this.activeTaskList.getTaskListName();
