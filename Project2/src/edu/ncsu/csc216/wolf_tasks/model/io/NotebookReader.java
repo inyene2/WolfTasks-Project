@@ -102,7 +102,7 @@ public class NotebookReader {
 		// trim leading
 		boolean isActive = false;
 		boolean isRecurring = false;
-		String nameAndFields = taskScanner.nextLine().trim().substring(2);
+		String nameAndFields = taskScanner.nextLine().trim().substring(0);
 		Scanner taskFieldsScnr = new Scanner(nameAndFields);
 		taskFieldsScnr.useDelimiter(",");
 		String name = taskFieldsScnr.next();
@@ -145,9 +145,12 @@ public class NotebookReader {
 		while (taskScanner.hasNextLine()) {
 			description += taskScanner.nextLine().trim() + "\n";
 		}
+		
+		Task t = new Task(name, description, isRecurring, isActive);
+		taskList.addTask(t);
 
 		taskScanner.close();
-		return new Task(name, description, isRecurring, isActive);
+		return t;
 	}
 
 }

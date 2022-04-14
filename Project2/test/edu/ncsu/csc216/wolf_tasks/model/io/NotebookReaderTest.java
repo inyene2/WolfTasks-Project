@@ -58,19 +58,16 @@ class NotebookReaderTest {
 		
 		assertEquals("Active Tasks,CSC 216,CSC 226,Habits,", nameList);
 
-//		Task t1 = n.getCurrentTaskList().getTask(0);
-//		Task t2 = n.getCurrentTaskList().getTask(1);
-//
-//		assertEquals("Complete exercises", t1.getTaskName());
-//		assertTrue(t1.isRecurring());
-//		assertFalse(t1.isActive());
-//
-//		assertEquals("", t1.toString());
-//		assertEquals("", t2.toString());
-//
-//		assertEquals("Complete quizzes", t2.getTaskName());
-//		assertTrue(t2.isRecurring());
-//		assertFalse(t2.isActive());
+		Task t1 = n.getCurrentTaskList().getTask(0);
+		Task t2 = n.getCurrentTaskList().getTask(1);
+
+		assertEquals("Read Project 2 Requirements", t1.getTaskName());
+		assertFalse(t1.isRecurring());
+		assertFalse(t1.isActive());
+
+		assertEquals("Create CRC Cards", t2.getTaskName());
+		assertFalse(t2.isRecurring());
+		assertTrue(t2.isActive());
 
 		// assertDoesNotThrow(() -> NotebookReader.readNotebookFile(validTestFile2));
 	}
