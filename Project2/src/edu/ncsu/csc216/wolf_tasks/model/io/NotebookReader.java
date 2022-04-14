@@ -51,6 +51,12 @@ public class NotebookReader {
 					Notebook brokenTasks = new Notebook(name);
 					return brokenTasks;
 				}
+//				n.setCurrentTaskList("Active Tasks");
+//				for (int i = 0; i < t.getTasks().size(); i++) {
+//					if (t.getTask(i).isActive()) {
+//						n.getCurrentTaskList().addTask(t.getTask(i));
+//					}
+//				}
 				n.addTaskList(t);
 			}
 			// Close the Scanner b/c we're responsible with our file handles
@@ -88,7 +94,7 @@ public class NotebookReader {
 			// break tasklist into "task tokens"
 			scnr.useDelimiter("\\r?\\n?[*]");
 			while (scnr.hasNext()) {
-				//handle task problems
+				// handle task problems
 				try {
 					processTask(t, scnr.next());
 				} catch (Exception e) {
