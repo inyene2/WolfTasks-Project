@@ -198,7 +198,7 @@ public class Notebook {
 		// checks if name is duplicate name of other tasklist
 		for (int i = 0; i < this.taskLists.size(); i++) {
 			if (name.equals(taskLists.get(i).getTaskListName())) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Invalid name.");
 			}
 		}
 		// removes, edits, then re-adds, currentTaskList
@@ -264,6 +264,7 @@ public class Notebook {
 			t.setTaskDescription(description);
 			t.setRecurring(recurring);
 			t.setActive(active);
+			getActiveTaskList();
 		}
 	}
 
