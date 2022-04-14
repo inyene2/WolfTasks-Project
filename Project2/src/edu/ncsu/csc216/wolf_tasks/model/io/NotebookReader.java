@@ -103,7 +103,6 @@ public class NotebookReader {
 				try {
 					processTask(t, scnr.next());
 				} catch (Exception e) {
-					t.setCompletedCount(0);
 					continue;
 				}
 			}
