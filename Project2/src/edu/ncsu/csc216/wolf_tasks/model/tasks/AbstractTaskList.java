@@ -71,7 +71,7 @@ public abstract class AbstractTaskList {
 	 * @param completedCount the completedCount to set
 	 * @throws IllegalArgumentException if the count is less than 0
 	 */
-	private void setCompletedCount(int completedCount) {
+	public void setCompletedCount(int completedCount) {
 		if (completedCount < 0) {
 			throw new IllegalArgumentException("Invalid completed count.");
 		}

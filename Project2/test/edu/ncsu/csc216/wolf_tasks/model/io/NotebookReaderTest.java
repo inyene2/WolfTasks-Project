@@ -116,8 +116,13 @@ class NotebookReaderTest {
 		Notebook n4 = NotebookReader.readNotebookFile(validTestFile5);
 		assertEquals("Personal", n4.getNotebookName());
 		n4.setCurrentTaskList("Habits");
+		
+		assertEquals(0, n4.getCurrentTaskList().getCompletedCount());
 		//has one task list with a single task -- skips first
+		// TODO figure out why notebook 7 works for ignoring on here but not on jenkins
 		assertEquals(1, n4.getCurrentTaskList().getTasks().size());
+		n4.setCurrentTaskList("Active Tasks");
+		assertEquals(0, n4.getCurrentTaskList().getTasks().size());
 	}
 
 }
