@@ -40,7 +40,7 @@ public class SwapList<E> implements ISwapList<E> {
 		if (element == null) {
 			throw new NullPointerException("Cannot add null element.");
 		}
-		checkCapacity(size() + 1);
+		checkCapacity(size + 1);
 		list[size++] = element;
 	}
 
