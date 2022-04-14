@@ -34,9 +34,8 @@ public class NotebookTest {
 	@Test
 	void testNotebook() {
 		Notebook n = new Notebook("Notebook1");
-		
 		assertEquals("Notebook1", n.getNotebookName());
-		assertFalse(n.isChanged());
+		assertTrue(n.isChanged());
 	}
 	
 	/**
@@ -72,9 +71,9 @@ public class NotebookTest {
 	void testIsChanged() {
 		Notebook n = new Notebook("Notebook1");
 		
-		assertFalse(n.isChanged());
-		n.setChanged(true);
 		assertTrue(n.isChanged());
+		n.setChanged(false);
+		assertFalse(n.isChanged());
 	}
 	
 	/**
@@ -84,9 +83,9 @@ public class NotebookTest {
 	void testSetChanged() {
 		Notebook n = new Notebook("Notebook1");
 		
-		assertFalse(n.isChanged());
-		n.setChanged(true);
 		assertTrue(n.isChanged());
+		n.setChanged(false);
+		assertFalse(n.isChanged());
 	}
 
 	/**
@@ -103,7 +102,7 @@ public class NotebookTest {
 		
 		n.addTaskList(taskList);
 		
-		assertEquals(1, n.getTaskListsNames().length);
+		assertEquals(2, n.getTaskListsNames().length);
 		
 	}
 
@@ -121,8 +120,9 @@ public class NotebookTest {
 		n.addTaskList(taskList);
 		n.addTaskList(taskList2);
 		
-		assertEquals("List1", n.getTaskListsNames()[0]);
-		assertEquals("List2", n.getTaskListsNames()[1]);
+		assertEquals("Active Tasks", n.getTaskListsNames()[0]);
+		assertEquals("List1", n.getTaskListsNames()[1]);
+		assertEquals("List2", n.getTaskListsNames()[2]);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class NotebookTest {
 		
 		n.addTaskList(taskList);
 		
-		n.editTaskList("List1");
+		n.editTaskList("List2");
 		
 		assertTrue(n.isChanged());
 	}
@@ -188,11 +188,11 @@ public class NotebookTest {
 		n.addTaskList(taskList);
 		n.addTaskList(taskList2);
 		
-		assertEquals(2, n.getTaskListsNames().length);
+		assertEquals(3, n.getTaskListsNames().length);
 		
 		n.removeTaskList();
 		
-		assertEquals(1, n.getTaskListsNames().length);
+		assertEquals(2, n.getTaskListsNames().length);
 	}
 
 	/**
