@@ -53,7 +53,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 			// Checks for duplicate at current spot and then the next spot, since the only
 			// place a duplicate can be is those locations
 			if (current.data == element || current.next != null && current.next.data == element) {
-				throw new IllegalArgumentException("Cannot add duplicate element");
+				throw new IllegalArgumentException("Cannot add duplicate element.");
 			}
 
 			// Add
@@ -115,6 +115,12 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public boolean contains(E element) {
+		
+		// case of empty list
+		if(size == 0) {
+			return false;
+		}
+		
 		ListNode current = front;
 
 		// Traverse
