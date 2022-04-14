@@ -139,9 +139,9 @@ public class SwapList<E> implements ISwapList<E> {
 		checkIndex(idx);
 		// Case of indexed item already being at front
 		if (idx != 0) {
-			E temp = list[0];
-			list[0] = list[idx];
-			list[idx] = temp;
+			for (int i = idx; i > 0; i--) {
+				moveUp(i);
+			}
 		}
 
 	}
@@ -157,9 +157,9 @@ public class SwapList<E> implements ISwapList<E> {
 		checkIndex(idx);
 		// Case of indexed item already being at back
 		if (idx != size() - 1) {
-			E temp = list[size() - 1];
-			list[size() - 1] = list[idx];
-			list[idx] = temp;
+			for (int i = idx; i < size(); i++) {
+				moveDown(i);
+			}
 		}
 	}
 
