@@ -61,11 +61,16 @@ public class NotebookReader {
 			}
 			// Close the Scanner b/c we're responsible with our file handles
 			fileReader.close();
+			
+			n.setCurrentTaskList("Active Tasks");
+			
 			return n;
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
+		
+		
 	}
 
 	/**
