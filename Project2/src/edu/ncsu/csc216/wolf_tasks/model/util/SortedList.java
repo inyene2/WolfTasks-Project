@@ -116,13 +116,13 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	@Override
 	public boolean contains(E element) {
 		
-		// case of empty list
-		if(size == 0) {
-			return false;
-		}
-		
 		ListNode current = front;
 
+		//case for first element in list
+		if (current != null && element.equals(current.data) ) {
+			return true;
+		}
+		
 		// Traverse
 		for (int i = 0; i < size() - 1; i++) {
 			current = current.next;
