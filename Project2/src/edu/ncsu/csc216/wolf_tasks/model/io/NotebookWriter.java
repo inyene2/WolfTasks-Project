@@ -21,12 +21,12 @@ public class NotebookWriter {
 	 * 
 	 * @param file     the file to write to
 	 * @param name     the name of the notebook
-	 * @param taskList the list of tasks to write out
+	 * @param taskLists the list of tasks to write out
 	 * @throws IllegalArgumentException if can't write to file
 	 */
-	public static void writeNotebookFile(File filename, String name, ISortedList<TaskList> taskLists) {
+	public static void writeNotebookFile(File file, String name, ISortedList<TaskList> taskLists) {
 		try {
-	        PrintStream fileWriter = new PrintStream(filename);
+	        PrintStream fileWriter = new PrintStream(file);
 	        fileWriter.print("! " + name + "\n");
 	        if (taskLists.size() != 0) {
 	        	for (int i = 0; i < taskLists.size(); i++) {

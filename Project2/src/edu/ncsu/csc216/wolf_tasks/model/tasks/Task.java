@@ -203,9 +203,9 @@ public class Task implements Cloneable {
 			t += ",recurring";
 		}
 		if (this.isActive()) {
-			t+= ",active";
+			t += ",active";
 		}
-		t+= "\n" + this.getTaskDescription();
+		t += "\n" + this.getTaskDescription();
 		return t;
 		
 		

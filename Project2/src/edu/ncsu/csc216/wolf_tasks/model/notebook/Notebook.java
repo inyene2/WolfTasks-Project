@@ -55,7 +55,7 @@ public class Notebook {
 	/**
 	 * Method to do file output with a notebook file
 	 * 
-	 * @param file the file to output to
+	 * @param notebookFile the file to output to
 	 */
 	public void saveNotebook(File notebookFile) {
 		NotebookWriter.writeNotebookFile(notebookFile, notebookName, taskLists);

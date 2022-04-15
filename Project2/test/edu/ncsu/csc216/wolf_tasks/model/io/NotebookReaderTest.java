@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.wolf_tasks.model.notebook.Notebook;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.Task;
-import edu.ncsu.csc216.wolf_tasks.model.tasks.TaskList;
 
 /**
  * Tests NotebookReader class
