@@ -197,7 +197,7 @@ public class Task implements Cloneable {
 		if(this.isRecurring()) {
 			t += ",recurring";
 		}
-		else if (this.isActive()) {
+		if (this.isActive()) {
 			t+= ",active";
 		}
 		t+= "\n" + this.getTaskDescription();
