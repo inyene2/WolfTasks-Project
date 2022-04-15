@@ -183,6 +183,6 @@ public class TaskTest {
 	void testToString() {
 		Task t = new Task("Name", "Task description", true, false);
 		
-		assertEquals("Name,Task description,true,false", t.toString());
+		assertEquals("* Name,recurring" + "\n" + "Task description", t.toString());
 	}
 }

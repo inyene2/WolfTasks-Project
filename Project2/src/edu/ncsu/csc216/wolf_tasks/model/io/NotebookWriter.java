@@ -24,25 +24,27 @@ public class NotebookWriter {
 	 * @param taskList the list of tasks to write out
 	 * @throws IllegalArgumentException if can't write to file
 	 */
-	public static void writeNotebookFile(File file, String name, ISortedList<TaskList> taskList) {
+	public static void writeNotebookFile(File filename, String name, ISortedList<TaskList> taskLists) {
 		try {
-			PrintStream fileWriter = new PrintStream(file);
-			fileWriter.print("! " + name + "\n");
-			if (taskList.size() != 0) {
-//				for (int i = 0; i < taskList.size(); i++) {
-//					fileWriter.print("# " + taskList.get(i).getTaskListName() + "," + taskList.get(i).getCompletedCount() + "\n");
-//					if (taskList.get(i).getTasks().size() != 0) {
-//						for (int j = 0; j < taskList.get(i).getTasks().size(); j++) {
-//							fileWriter.print(taskList.get(i).toString());
-//						}
-//					}
-//				}
-				fileWriter.print("deez");
-			}
-			fileWriter.close();
-		} catch (Exception e ) {
-			throw new IllegalArgumentException("Cannot write to file");
-		}
+	        PrintStream fileWriter = new PrintStream(filename);
+	        fileWriter.print("! " + name + "\n");
+	        if (taskLists.size() != 0) {
+	        	for (int i = 0; i < taskLists.size(); i++) {
+	        		fileWriter.print("# " + taskLists.get(i).getTaskListName() + "," + taskLists.get(i).getCompletedCount() + "\n");
+	        		if (taskLists.get(i).getTasks().size() != 0) {
+	        			for (int j = 0; j < taskLists.get(i).getTasks().size(); j++) {
+	        				fileWriter.println(taskLists.get(i).getTask(j).toString());
+	        			}
+	        		}
+	        	}
+	        }
+	
+		    fileWriter.close();
+
+        } catch (Exception e) {
+        	throw new IllegalArgumentException("Unable to save file.");
+        }
+
 	}
 
 }
