@@ -10,7 +10,6 @@ import edu.ncsu.csc216.wolf_tasks.model.tasks.AbstractTaskList;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.Task;
 import edu.ncsu.csc216.wolf_tasks.model.tasks.TaskList;
 import edu.ncsu.csc216.wolf_tasks.model.util.ISwapList;
-import edu.ncsu.csc216.wolf_tasks.model.util.SwapList;
 
 /**
  * This is the WolfTasks input class, NotebookReader. Reads in a notebook from a
