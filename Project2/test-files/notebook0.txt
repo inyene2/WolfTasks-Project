@@ -1,1 +1,4 @@
 ! Summer Plans
+# Tasklist1,3
+* Squat,recurring
+Workout1
