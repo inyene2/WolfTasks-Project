@@ -43,7 +43,7 @@ public class NotebookWriterTest {
 //		TaskList t2 = new TaskList("Tasklist2", 4);
 //		
 //		//create new Tasks
-		Task k = new Task("Squat", "Workout1", true, false);
+		Task k = new Task("Squat", "Workout1", true, true);
 //		Task k2 = new Task("Run", "Workout2", false, true);
 //		Task k3 = new Task("Rest", "Workout3", false, false);
 //		
