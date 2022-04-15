@@ -182,7 +182,7 @@ public class TaskTest {
 	@Test
 	void testToString() {
 		Task t = new Task("Name", "Task description", true, false);
-		
+		 
 		assertEquals("* Name,recurring" + "\n" + "Task description", t.toString());
 	}
 }
