@@ -126,7 +126,12 @@ public class Task implements Cloneable {
 	 * @return the name of a TaskList
 	 */
 	public String getTaskListName() {
-		return taskLists.get(0).getTaskListName();
+		if(taskLists == null || taskLists.size() == 0) {
+			return "";
+		}
+		else {
+			return taskLists.get(0).getTaskListName();
+		}
 	}
 
 	/**

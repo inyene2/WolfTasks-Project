@@ -121,6 +121,8 @@ public class TaskTest {
 	void testGetTaskListName() {
 		TaskList taskList = new TaskList("List1", 0);
 		Task t = new Task("Name", "Task description", true, false);
+		assertEquals("", t.getTaskListName());
+		
 		taskList.addTask(t);
 		
 		assertEquals("List1", t.getTaskListName());
